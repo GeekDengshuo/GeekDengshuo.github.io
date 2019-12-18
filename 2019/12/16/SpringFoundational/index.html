@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>UnionFind算法 | Deng&#39;s Blog</title>
+  <title>SpringFoundational | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="union-find 算法 1.union-find 是什么？ 2.union-find 原理，基本的数据结构 3.union-find 如何应用及使用场景">
-<meta name="keywords" content="算法; union-find">
+  <meta name="description" content="Spring 基础知识Spring是一个居于IOC和AOP的J2EE框架,用来简化企业级Java开发,促进代码的松耦合; Spring是典型的非侵入式编程 Spring旨在通过模版封装来消除模版式代码 1.Spring offer a container核心容器,使用Spring application context (应用上下文)加载资源  文件中加载 FileSystemXmlapplica">
+<meta name="keywords" content="Spring;基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UnionFind算法">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;UnionFind%E7%AE%97%E6%B3%95&#x2F;index.html">
+<meta property="og:title" content="SpringFoundational">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;16&#x2F;SpringFoundational&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="union-find 算法 1.union-find 是什么？ 2.union-find 原理，基本的数据结构 3.union-find 如何应用及使用场景">
+<meta property="og:description" content="Spring 基础知识Spring是一个居于IOC和AOP的J2EE框架,用来简化企业级Java开发,促进代码的松耦合; Spring是典型的非侵入式编程 Spring旨在通过模版封装来消除模版式代码 1.Spring offer a container核心容器,使用Spring application context (应用上下文)加载资源  文件中加载 FileSystemXmlapplica">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;cat.jpg">
-<meta property="og:updated_time" content="2019-12-05T03:03:16.903Z">
+<meta property="og:updated_time" content="2019-12-18T09:58:32.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;cat.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -151,69 +149,112 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-UnionFind算法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SpringFoundational" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      UnionFind算法
+      SpringFoundational
     </h1>
   
 
         
-        <a href="/2019/12/05/UnionFind%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-12-05T00:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+        <a href="/2019/12/16/SpringFoundational/" class="archive-article-date">
+  	<time datetime="2019-12-16T01:15:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="union-find-算法"><a href="#union-find-算法" class="headerlink" title="union-find 算法"></a>union-find 算法</h2><ul>
-<li>1.union-find 是什么？</li>
-<li>2.union-find 原理，基本的数据结构</li>
-<li>3.union-find 如何应用及使用场景</li>
-</ul>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/cat.jpg" alt=""></p>
-<a id="more"></a>
-
-<h3 id="1-union-find-算法的定义"><a href="#1-union-find-算法的定义" class="headerlink" title="1.union-find 算法的定义"></a>1.union-find 算法的定义</h3><p>并查集 是一种树形的数据结构，用于处理一些不交集(Disjoint Sets)的合并及查询问题</p>
-<p>union-find 联合查找算法，定义来并查集数据结构的操作</p>
-<p>主要操作:</p>
+        <h2 id="Spring-基础知识"><a href="#Spring-基础知识" class="headerlink" title="Spring 基础知识"></a>Spring 基础知识</h2><p>Spring是一个居于IOC和AOP的J2EE框架,用来简化企业级Java开发,促进代码的松耦合;</p>
+<p>Spring是典型的非侵入式编程</p>
+<p>Spring旨在通过模版封装来消除模版式代码</p>
+<h3 id="1-Spring-offer-a-container"><a href="#1-Spring-offer-a-container" class="headerlink" title="1.Spring offer a container"></a>1.Spring offer a container</h3><p>核心容器,使用Spring application context (应用上下文)加载资源</p>
 <ul>
-<li>union</li>
-<li>find</li>
+<li>文件中加载 FileSystemXmlapplicationcontext</li>
+<li>类路径中加载 ClassPathXmlApplicationContext</li>
+<li>java配置中加载 AnnotationConfigApplicationContext</li>
+<li>AnnotationConfigWebApplicationContext</li>
 </ul>
-<p><strong>动态连通性</strong></p>
-<p>设计一个数据结构来保存程序已经知道的数据信息，并用它们来判断一个新对象是否相连<br>这样的问题成为动态连通性问题</p>
-<h3 id="2-unoin-find-算法的实现"><a href="#2-unoin-find-算法的实现" class="headerlink" title="2.unoin-find 算法的实现"></a>2.unoin-find 算法的实现</h3><p>使用的基本数据结构 - 数组</p>
-<p>基本的API接口</p>
+<h3 id="2-Automatic-Configuration"><a href="#2-Automatic-Configuration" class="headerlink" title="2.Automatic Configuration"></a>2.Automatic Configuration</h3><ul>
+<li>autowiring, 自动装配,自动注入依赖的对象</li>
+<li>component scanning ,组件扫描，找到文件名及路径</li>
+</ul>
+<p>@Component</p>
+<h3 id="3-DI-Dependency-Injection"><a href="#3-DI-Dependency-Injection" class="headerlink" title="3.DI Dependency Injection"></a>3.DI Dependency Injection</h3><p>依赖注入,实现代码的松耦合</p>
+<p>通过依赖注入，将对象的依赖关系将由系统中负责协调各对象的第三方组件在创建对象的时候进行设定，对象无需自行创建或管理他们的依赖关系</p>
 <ul>
-<li>find</li>
-<li>union</li>
-<li>connected</li>
-<li>getCount</li>
+<li>构造器注入</li>
+<li>Setter方法注入</li>
 </ul>
-<p>代码实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">UnionFind</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        count=N;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        id=<span class="keyword">new</span> <span class="keyword">int</span>[count];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;count;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            id[i]=i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> count;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> find(p)==find(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 查找最早的点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 方法一，数组id，直接返回标识 quick-find</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//return id[p];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 方法二，要循环查找到结点  quick-union</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(p!=id[p])&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            p=id[p];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> id[p];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 方法一，数组id</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="comment">        int pID=id[p];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">        int qID=id[q];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">        if(pID==qID)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            return;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="comment">        for(int i=0;i&lt;id.length;i++)&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            if(id[i]==qID)&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="comment">                id[i]=pID;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="comment">        &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="comment">        count--;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="comment">         */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 方法二,quick-union</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> pRoot=find(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> qRoot=find(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(pRoot==qRoot) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        id[pRoot]=qRoot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        count--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>在quick-union的过程中，会导致树的深度过高，影响find的查找效率</p>
-<p>通过维护一个数组，来保存结点的高度，在union的时候，通过判断树的高度</p>
-<p>将小树连接到大树上，实现树高度维持在(lgN)</p>
+<h3 id="4-AOP-Aspect-oriented-Programming"><a href="#4-AOP-Aspect-oriented-Programming" class="headerlink" title="4.AOP Aspect-oriented Programming"></a>4.AOP Aspect-oriented Programming</h3><p>面向切面编程，通过声明切面Aspect，核心业务代码调用周边功能，可以不需要显示调用，不需要知道其的存在</p>
 <ul>
-<li>find  lgN</li>
-<li>union lgN</li>
+<li>核心业务,登陆、数据处理</li>
+<li>周边业务,性能统计、日志、事务管理</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeightUnionFind</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] weight;   <span class="comment">// 树的高度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    WeightUnionFind(<span class="keyword">int</span> N)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        count=N;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        id=<span class="keyword">new</span> <span class="keyword">int</span>[count];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        weight=<span class="keyword">new</span> <span class="keyword">int</span>[count];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;count;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            id[i]=i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            weight[i]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> count;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(p!=id[p])&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            p=id[p];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> id[p];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> find(p)==find(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> pRoot=id[p];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> qRoot=id[q];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(pRoot==qRoot)<span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 通过权重的比较，实现树的连接，不会导致树的高度太高，最高位lgN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(weight[pRoot]&lt;weight[qRoot])&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            id[pRoot]=qRoot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            weight[qRoot]+=weight[pRoot];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">            id[qRoot]=pRoot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            weight[pRoot]+=weight[qRoot];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        count--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-
-<h3 id="3-union-find-算法的应用"><a href="#3-union-find-算法的应用" class="headerlink" title="3.union-find 算法的应用"></a>3.union-find 算法的应用</h3><ul>
-<li>网络，判断网络中的计算机能否通信</li>
-<li>电力，搭建通信线路</li>
-<li>社交网络，判断是不是同一个社交圈</li>
-<li>数学，集合的交并问题</li>
+<p>周边业务混入到核心业务中会导致代码重复、冗余;核心代码的结构变的混乱</p>
+<h3 id="5-装配Bean"><a href="#5-装配Bean" class="headerlink" title="5.装配Bean"></a>5.装配Bean</h3><ul>
+<li>1.隐式的bean发现机制和自动装配</li>
+<li>2.Java中进行显式装配</li>
+<li>3.XML进行显示装配</li>
+</ul>
+<p><strong>自动装配</strong></p>
+<p>注解:</p>
+<p>@Component    // 组件，可以创建bean<br>@Component(“name”)</p>
+<p>@ComponentScan  // 寻找带有@Component注解的类</p>
+<p>@Autowired      // 自动装配<br>@Inject         // Java依赖注入的规范，相同的效果</p>
+<p>在满足依赖过程中，会在Spring应用上下文中寻找匹配某个bean需求的其他bean</p>
+<ul>
+<li>只有一个bean匹配，bean将会被装配起来</li>
+<li>无匹配，会抛出一个异常</li>
+<li>多个bean可以匹配，Spring会抛出异常</li>
+</ul>
+<p><strong>JavaConfig</strong></p>
+<p>java进行显示装配</p>
+<p>你需要在第三方库中的组件(无法添加注解)装配到应用中，自动化配置的方案行不通，需要进行明确配置</p>
+<p>@configuration</p>
+<p>@Bean<br>Spring拦截器调用，直接返回该方法创建的bean</p>
+<p>可以采用任何必要的java功能来产生bean实例</p>
+<p><strong>XML</strong></p>
+<p>学习用来维护之前已经存在的XML配置文件</p>
+<p>声明bean<br><bean class="name"/></p>
+<p>构造器注入<br><constructor-arg ></p>
+<h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><p><strong>lombok</strong></p>
+<p>可以通过简单的注解的形式来帮组我们简化消除一些必须有(显示的很臃肿)的java代码工具</p>
+<p>lombok省去手动创建 getter、setter、constructor</p>
+<p>可以在编译时自行创建，让代码看起来更加的整洁</p>
+<p><a href="https://projectlombok.org" target="_blank" rel="noopener">lombok网站及文档</a></p>
+<p><strong>SpringMVC的工作流程</strong></p>
+<ul>
+<li>1.请求经过一个(front controller)前端控制器 servlet(Dispatch Servlet)</li>
+<li>2.(handler mapping)处理器映射，来确定具体哪一个控制器</li>
+<li>3.选择合适的控制的卸下负载</li>
+<li>4.控制器产生模型信息(Model)</li>
+<li>5.名称查找，使用市图解析器(view resolver)</li>
+</ul>
+<p><strong>Controller 控制器</strong></p>
+<p>在SpingMVC框架中主要工作时处理HTTP请求，并将处理后的数据发送给View</p>
+<ul>
+<li>HTML</li>
+<li>RESTful</li>
+</ul>
+<p><strong>Annoation注解信息</strong></p>
+<p>@RequestMapping(method=RequestMethod.get)<br>@GetMapping</p>
+<p>在处理映射的时候，要明确具体的方法</p>
+<p>@RequestMapping</p>
+<p>@GetMapping<br>@PostMapping<br>@PutMapping<br>@PatchMapping<br>@DeleteMapping</p>
+<p>在类的级别使用@RequestMapping来强调路径 @RequestMapping(“/desgin”)</p>
+<p>在具体的方法Method使用具体的映射 @PutMapping ,代表HTTP put方法</p>
+<p><strong>View视图</strong></p>
+<p>Thyemleaf设计的目的是与任何框架解耦,进行框架分离</p>
+<p>视图工具:</p>
+<ul>
+<li>Thyemleaf</li>
+<li>Groovy</li>
+<li>JSP</li>
 </ul>
 
       
@@ -228,7 +269,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">算法; union-find</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Spring;基础</a>
         		</li>
       		
 		</ul>
@@ -284,7 +325,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/05/UnionFind%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/16/SpringFoundational/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +339,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/16/SpringFoundational/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SpringFoundational
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式七大设计原则</div>
+    <a href="/2019/12/05/UnionFind%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UnionFind算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
