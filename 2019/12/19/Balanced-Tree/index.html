@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Deng&#39;s Blog</title>
+  <title>Balanced Tree | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术、生活博客">
-<meta name="keywords" content="Java,SpringBoot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Deng&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="平衡查找树二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。 平衡查找树可以保证所有的查找都在lgN次比较内结束 注意区分平衡查找树和AVL树 AVL树:自平衡的二叉查找树  自平衡，通过树的旋转操作 二叉树">
+<meta name="keywords" content="平衡树;随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Balanced Tree">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;Balanced-Tree&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="技术、生活博客">
+<meta property="og:description" content="平衡查找树二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。 平衡查找树可以保证所有的查找都在lgN次比较内结束 注意区分平衡查找树和AVL树 AVL树:自平衡的二叉查找树  自平衡，通过树的旋转操作 二叉树">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%E6%A0%91.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B+%E6%A0%91.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%2A%E6%A0%91.png">
+<meta property="og:updated_time" content="2019-12-19T12:42:09.339Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%E6%A0%91.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -148,16 +153,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Balanced-Tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Balanced-Tree" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/Balanced-Tree/">Balanced Tree</a>
+    <h1 class="article-title" itemprop="name">
+      Balanced Tree
     </h1>
   
 
@@ -178,7 +181,42 @@
 <li>自平衡，通过树的旋转操作</li>
 <li>二叉树</li>
 </ul>
-        
+<a id="more"></a>
+
+<h3 id="B树结构"><a href="#B树结构" class="headerlink" title="B树结构"></a>B树结构</h3><p>应用:Mysql的索引基于B树和B+树</p>
+<p>BalancedTree<br>利用B树重新组织结点，降低树的高度</p>
+<p><strong>结点度:</strong> 子树的个数<br><strong>树的度:</strong> 所有树中最大的结点度</p>
+<p>通过学习一个简单的B树结构来对B树进行理解</p>
+<p><strong>2-3树结构</strong></p>
+<ul>
+<li>叶子结点都在同一层</li>
+<li>2结点，含有一个键和两条链接，要么存在(两个子结点)，要不不存在子结点</li>
+<li>3结点，含有两个键和三条链接，要么存在三个字结点，要么不存在子结点</li>
+</ul>
+<p><strong>B树的示意图</strong></p>
+<p><img src="http://q20lbsfom.bkt.clouddn.com/B%E6%A0%91.png" alt="B树"></p>
+<p><strong>B树的性质</strong></p>
+<p>B树是一种多路搜索树</p>
+<ul>
+<li>B树的阶，节点最多子节点的个数</li>
+<li>B树的搜索，从根节点开始，对结点内的关键字序列进行二分查找，查找命中就结束，否者进入关键字所属范围的儿子结点查找，直到叶子结点</li>
+<li>关键字分布在整颗树中，<strong>叶子结点和非叶子结点都存放数据</strong></li>
+<li>搜索可能在非叶子结点命中结束</li>
+</ul>
+<p><strong>B+树的示意图</strong></p>
+<p><img src="http://q20lbsfom.bkt.clouddn.com/B+%E6%A0%91.png" alt="B+树"></p>
+<p><strong>B+树的性质</strong></p>
+<p>B+树是B树的变体，也是一种多路搜索树</p>
+<ul>
+<li>B+树只有到达叶子结点才命中(B树可以在非叶子结点命中)</li>
+<li>所有的关键字都在叶子结点的链表中(稠密索引)</li>
+<li>非叶子结点相当于叶子结点的索引(稀疏索引)，叶子结点相当于数据层</li>
+<li>适合文件系统的索引</li>
+</ul>
+<p><em><em>B\</em>树的性质</em></p>
+<p><img src="http://q20lbsfom.bkt.clouddn.com/B%2A%E6%A0%91.png" alt="B*树"></p>
+<p>B*树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针</p>
+
       
 
       
@@ -200,16 +238,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/Balanced-Tree/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/Balanced-Tree/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/16/SpringFoundational/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringFoundational</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -229,409 +326,14 @@
 
 
 
-
   
-    <article id="post-SpringFoundational" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/SpringFoundational/">SpringFoundational</a>
-    </h1>
   
 
-        
-        <a href="/2019/12/16/SpringFoundational/" class="archive-article-date">
-  	<time datetime="2019-12-16T01:15:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Spring-基础知识"><a href="#Spring-基础知识" class="headerlink" title="Spring 基础知识"></a>Spring 基础知识</h2><p>Spring是一个居于IOC和AOP的J2EE框架,用来简化企业级Java开发,促进代码的松耦合;</p>
-<p>Spring是典型的非侵入式编程</p>
-<p>Spring旨在通过模版封装来消除模版式代码</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Spring;基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/16/SpringFoundational/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-UnionFind算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/UnionFind%E7%AE%97%E6%B3%95/">UnionFind算法</a>
-    </h1>
   
 
-        
-        <a href="/2019/12/05/UnionFind%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-12-05T00:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="union-find-算法"><a href="#union-find-算法" class="headerlink" title="union-find 算法"></a>union-find 算法</h2><ul>
-<li>1.union-find 是什么？</li>
-<li>2.union-find 原理，基本的数据结构</li>
-<li>3.union-find 如何应用及使用场景</li>
-</ul>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/cat.jpg" alt=""></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">算法; union-find</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/UnionFind%E7%AE%97%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式七大设计原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/">设计模式七大设计原则</a>
-    </h1>
   
 
-        
-        <a href="/2019/12/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" class="archive-article-date">
-  	<time datetime="2019-12-03T12:50:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p><strong>为什么学习设计模式？</strong></p>
-<ul>
-<li>理解松耦合设计思想</li>
-<li>掌握面向对象的设计原则</li>
-<li>掌握重构技法和改善设计</li>
-</ul>
-<p><strong>面试常见的问题?</strong></p>
-<ul>
-<li>项目(框架)使用了什么设计模式？</li>
-<li>设计模式如何使用？</li>
-<li>解决了什么问题？</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">设计模式，设计原则</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-搭建hexo博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/01/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">搭建hexo博客</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/01/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2019-12-01T06:43:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基于hexo的博客"><a href="#基于hexo的博客" class="headerlink" title="基于hexo的博客"></a>基于hexo的博客</h2><p><a href="https://dengshuo7412.com" target="_blank" rel="noopener">搭建好的博客网站 dengshuo7412.com</a></p>
-<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><ul>
-<li><p>1.依赖文件下载 Node.js</p>
-</li>
-<li><p>2.Hexo的安装</p>
-</li>
-<li><p>3.部署到Github</p>
-</li>
-<li><p>4.Hexo创建博客基本操作</p>
-</li>
-<li><p>5.Hexo主题皮肤更换</p>
-</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/01/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/30/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/30/hello-world/" class="archive-article-date">
-  	<time datetime="2019-11-30T08:57:22.321Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/30/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -658,8 +360,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
