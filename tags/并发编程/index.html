@@ -6,22 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Balanced Tree | Deng&#39;s Blog</title>
+  <title>Tag: 并发编程 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平衡查找树二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。 平衡查找树可以保证所有的查找都在lgN次比较内结束 注意区分平衡查找树和AVL树 AVL树:自平衡的二叉查找树  自平衡，通过树的旋转操作 二叉树">
-<meta name="keywords" content="平衡树;随笔">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Balanced Tree">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;Balanced-Tree&#x2F;index.html">
+  <meta name="description" content="技术、生活博客">
+<meta name="keywords" content="Java,SpringBoot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deng&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="平衡查找树二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。 平衡查找树可以保证所有的查找都在lgN次比较内结束 注意区分平衡查找树和AVL树 AVL树:自平衡的二叉查找树  自平衡，通过树的旋转操作 二叉树">
+<meta property="og:description" content="技术、生活博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%E6%A0%91.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B+%E6%A0%91.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%2A%E6%A0%91.png">
-<meta property="og:updated_time" content="2019-12-19T12:42:09.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%E6%A0%91.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -153,197 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Balanced-Tree" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Balanced Tree
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/12/24/Java%E5%B9%B6%E5%8F%91-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%85%B1%E4%BA%AB/" class="archive-article-date">
+  	<time datetime="2019-12-24T06:01:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/12/24/Java%E5%B9%B6%E5%8F%91-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%85%B1%E4%BA%AB/">Java并发-线程安全及对象共享</a>
     </h1>
   
 
-        
-        <a href="/2019/12/19/Balanced-Tree/" class="archive-article-date">
-  	<time datetime="2019-12-19T11:57:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="平衡查找树"><a href="#平衡查找树" class="headerlink" title="平衡查找树"></a>平衡查找树</h3><p>二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。</p>
-<p><strong>平衡查找树</strong>可以保证所有的查找都在lgN次比较内结束</p>
-<p>注意区分平衡查找树和AVL树</p>
-<p>AVL树:自平衡的二叉查找树</p>
-<ul>
-<li>自平衡，通过树的旋转操作</li>
-<li>二叉树</li>
-</ul>
-<a id="more"></a>
-
-<h3 id="B树结构"><a href="#B树结构" class="headerlink" title="B树结构"></a>B树结构</h3><p>应用:Mysql的索引基于B树和B+树</p>
-<p>BalancedTree<br>利用B树重新组织结点，降低树的高度</p>
-<p><strong>结点度:</strong> 子树的个数<br><strong>树的度:</strong> 所有树中最大的结点度</p>
-<p>通过学习一个简单的B树结构来对B树进行理解</p>
-<p><strong>2-3树结构</strong></p>
-<ul>
-<li>叶子结点都在同一层</li>
-<li>2结点，含有一个键和两条链接，要么存在(两个子结点)，要不不存在子结点</li>
-<li>3结点，含有两个键和三条链接，要么存在三个字结点，要么不存在子结点</li>
-</ul>
-<p><strong>B树的示意图</strong></p>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/B%E6%A0%91.png" alt="B树"></p>
-<p><strong>B树的性质</strong></p>
-<p>B树是一种多路搜索树</p>
-<ul>
-<li>B树的阶，节点最多子节点的个数</li>
-<li>B树的搜索，从根节点开始，对结点内的关键字序列进行二分查找，查找命中就结束，否者进入关键字所属范围的儿子结点查找，直到叶子结点</li>
-<li>关键字分布在整颗树中，<strong>叶子结点和非叶子结点都存放数据</strong></li>
-<li>搜索可能在非叶子结点命中结束</li>
-</ul>
-<p><strong>B+树的示意图</strong></p>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/B+%E6%A0%91.png" alt="B+树"></p>
-<p><strong>B+树的性质</strong></p>
-<p>B+树是B树的变体，也是一种多路搜索树</p>
-<ul>
-<li>B+树只有到达叶子结点才命中(B树可以在非叶子结点命中)</li>
-<li>所有的关键字都在叶子结点的链表中(稠密索引)</li>
-<li>非叶子结点相当于叶子结点的索引(稀疏索引)，叶子结点相当于数据层</li>
-<li>适合文件系统的索引</li>
-</ul>
-<p><em><em>B\</em>树的性质</em></p>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/B%2A%E6%A0%91.png" alt="B*树"></p>
-<p>B*树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">平衡树;随笔</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">并发编程</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/Balanced-Tree/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/12/20/Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis基础学习
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/12/16/SpringFoundational/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringFoundational</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -370,9 +228,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

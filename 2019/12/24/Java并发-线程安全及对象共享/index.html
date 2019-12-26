@@ -6,22 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Balanced Tree | Deng&#39;s Blog</title>
+  <title>Java并发-线程安全及对象共享 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平衡查找树二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。 平衡查找树可以保证所有的查找都在lgN次比较内结束 注意区分平衡查找树和AVL树 AVL树:自平衡的二叉查找树  自平衡，通过树的旋转操作 二叉树">
-<meta name="keywords" content="平衡树;随笔">
+  <meta name="description" content="主要内容:  线程安全性  对象的共享">
+<meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Balanced Tree">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;Balanced-Tree&#x2F;index.html">
+<meta property="og:title" content="Java并发-线程安全及对象共享">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;Java%E5%B9%B6%E5%8F%91-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%85%B1%E4%BA%AB&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="平衡查找树二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。 平衡查找树可以保证所有的查找都在lgN次比较内结束 注意区分平衡查找树和AVL树 AVL树:自平衡的二叉查找树  自平衡，通过树的旋转操作 二叉树">
+<meta property="og:description" content="主要内容:  线程安全性  对象的共享">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%E6%A0%91.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B+%E6%A0%91.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%2A%E6%A0%91.png">
-<meta property="og:updated_time" content="2019-12-19T12:42:09.339Z">
+<meta property="og:updated_time" content="2019-12-26T13:54:30.340Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;q20lbsfom.bkt.clouddn.com&#x2F;B%E6%A0%91.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -153,69 +149,99 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Balanced-Tree" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java并发-线程安全及对象共享" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Balanced Tree
+      Java并发-线程安全及对象共享
     </h1>
   
 
         
-        <a href="/2019/12/19/Balanced-Tree/" class="archive-article-date">
-  	<time datetime="2019-12-19T11:57:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+        <a href="/2019/12/24/Java%E5%B9%B6%E5%8F%91-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%85%B1%E4%BA%AB/" class="archive-article-date">
+  	<time datetime="2019-12-24T06:01:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="平衡查找树"><a href="#平衡查找树" class="headerlink" title="平衡查找树"></a>平衡查找树</h3><p>二叉树查找的性能很高，但是二叉树的平衡性(树的高度过高)无法保证，无法保证在动态插入中保证树的完美平衡。</p>
-<p><strong>平衡查找树</strong>可以保证所有的查找都在lgN次比较内结束</p>
-<p>注意区分平衡查找树和AVL树</p>
-<p>AVL树:自平衡的二叉查找树</p>
+        <p>主要内容:</p>
 <ul>
-<li>自平衡，通过树的旋转操作</li>
-<li>二叉树</li>
+<li><p>线程安全性</p>
+</li>
+<li><p>对象的共享</p>
+</li>
 </ul>
 <a id="more"></a>
 
-<h3 id="B树结构"><a href="#B树结构" class="headerlink" title="B树结构"></a>B树结构</h3><p>应用:Mysql的索引基于B树和B+树</p>
-<p>BalancedTree<br>利用B树重新组织结点，降低树的高度</p>
-<p><strong>结点度:</strong> 子树的个数<br><strong>树的度:</strong> 所有树中最大的结点度</p>
-<p>通过学习一个简单的B树结构来对B树进行理解</p>
-<p><strong>2-3树结构</strong></p>
+
+<h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p><strong>线程安全:</strong>当多个线程访问某一个类，不管运行时环境采用何种调度方式，或者线程将如何交替执行，并且<br>在主调代码中不需要任何而外的同步和协同，这个类都表现出正确的行为，那么这个类就是线程安全类</p>
+<p>并发编程: 线程+锁</p>
 <ul>
-<li>叶子结点都在同一层</li>
-<li>2结点，含有一个键和两条链接，要么存在(两个子结点)，要不不存在子结点</li>
-<li>3结点，含有两个键和三条链接，要么存在三个字结点，要么不存在子结点</li>
+<li>共享:可以由多个线程同时访问</li>
+<li>可变:变量值在其生命周期内可发生变化</li>
 </ul>
-<p><strong>B树的示意图</strong></p>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/B%E6%A0%91.png" alt="B树"></p>
-<p><strong>B树的性质</strong></p>
-<p>B树是一种多路搜索树</p>
+<p>并发线程的优点:</p>
 <ul>
-<li>B树的阶，节点最多子节点的个数</li>
-<li>B树的搜索，从根节点开始，对结点内的关键字序列进行二分查找，查找命中就结束，否者进入关键字所属范围的儿子结点查找，直到叶子结点</li>
-<li>关键字分布在整颗树中，<strong>叶子结点和非叶子结点都存放数据</strong></li>
-<li>搜索可能在非叶子结点命中结束</li>
+<li>多处理器</li>
+<li>建模的简单性</li>
+<li>异步事件简化处理</li>
 </ul>
-<p><strong>B+树的示意图</strong></p>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/B+%E6%A0%91.png" alt="B+树"></p>
-<p><strong>B+树的性质</strong></p>
-<p>B+树是B树的变体，也是一种多路搜索树</p>
+<p>并发安全问题: 竞态条件(Race Condition)</p>
 <ul>
-<li>B+树只有到达叶子结点才命中(B树可以在非叶子结点命中)</li>
-<li>所有的关键字都在叶子结点的链表中(稠密索引)</li>
-<li>非叶子结点相当于叶子结点的索引(稀疏索引)，叶子结点相当于数据层</li>
-<li>适合文件系统的索引</li>
+<li>安全性:是指程序的运行发展永远不会发生糟糕的事情</li>
+<li>活跃性:表示正确的事情最终都会发生</li>
 </ul>
-<p><em><em>B\</em>树的性质</em></p>
-<p><img src="http://q20lbsfom.bkt.clouddn.com/B%2A%E6%A0%91.png" alt="B*树"></p>
-<p>B*树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针</p>
+<p>设计并发安全的类:</p>
+<ul>
+<li>1.良好的面向对象技术</li>
+<li>2.不可修改性</li>
+<li>3.明晰的不变性</li>
+</ul>
+<p><strong>无状态的对象一定是线程安全的</strong></p>
+<p>上下文切换操作(context switch): 临时挂起活跃的线程，切换到另一个线程</p>
+<p><strong>内置锁(Intrinsic Lock)</strong></p>
+<p>内置锁也叫监视锁(Monitor Lock)</p>
+<p>synchronized</p>
+<p>内置锁是可重入的，重入提升了锁的封装性</p>
+<p>线程安全总结就是:</p>
+<p><font color="red">采用同步机制来协同对对象可变状态的访问</font>&gt;</p>
+<h3 id="对象的共享"><a href="#对象的共享" class="headerlink" title="对象的共享"></a>对象的共享</h3><p>在多线程的环境中如何共享和发布对象</p>
+<p>内存可见性(Memory Visibility)，不仅要防止一个线程在读取对象状态，另一个线程在修改，<br>另一方面，确保一个线程修改对象状态后，其他线程能够看到状态的变化(同步)</p>
+<p>指令重排序(Reordering):在没有同步的情况下，编译器、处理器以及运行时都可能对操作的执行顺序进行一些意想不到的调整</p>
+<p>加锁的含义不仅仅是局限于互斥行为，还包括内存可见性</p>
+<p>同步机制:</p>
+<ul>
+<li><p>volatile变量,将变量的更新值告诉其他线程(弱同步机制),但是不能保证原子性,只能保证可见性</p>
+</li>
+<li><p>加锁，确保可见性,又可以确保原子性</p>
+</li>
+</ul>
+<p><strong>发布与逸出</strong></p>
+<p>发布(Publish):发布一个对象,使对象能够在当前作用域之外的代码中使用</p>
+<p>例如,将对象的一种保存在公有静态变量中,任何类和线程都可以看见该对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">publishClass</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Set&lt;Secret&gt; knowSecrets;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        knowSecrets=<span class="keyword">new</span> HashSet&lt;&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>逸出(Escape):当某个不该发布的对象被发布时，这种情况称为逸出</p>
+<p>不要在构造过程中使this引用逸出</p>
+<p><strong>线程封闭</strong></p>
+<p>一种避免使用同步的方式就是不共享数据,单线程内访问数据(ThreadConfinement)</p>
+<ul>
+<li>栈封闭</li>
+<li>ThreadLocal类</li>
+</ul>
+<p><font color="blue">栈封闭</font><br>只有通过局部变量才能访问对象</p>
+<p><font color="blue">ThreadLocal类</font></p>
+<p>这个类使线程中的某个值与保存值的对象关联起来</p>
+<h3 id="对象的组合"><a href="#对象的组合" class="headerlink" title="对象的组合"></a>对象的组合</h3><ul>
+<li>1.使用同步策略(synchronization policy),Java监视器模式(编写代码的约定) 内置锁</li>
+<li>2.实例封闭机制(Instance Confinement),将数据封装在对象内部 final</li>
+</ul>
+<p>将线程安全性委托给现有的线程安全类(Collections.synchronizedList)</p>
 
       
 
@@ -229,7 +255,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">平衡树;随笔</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">并发编程</a>
         		</li>
       		
 		</ul>
@@ -285,7 +311,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/Balanced-Tree/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/24/Java%E5%B9%B6%E5%8F%91-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8F%8A%E5%AF%B9%E8%B1%A1%E5%85%B1%E4%BA%AB/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -299,18 +325,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/20/Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis基础学习
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/16/SpringFoundational/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringFoundational</div>
+    <a href="/2019/12/23/Object%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Object通用方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
