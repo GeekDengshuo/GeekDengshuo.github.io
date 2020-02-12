@@ -6,23 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>java并发-知识总结 | Deng&#39;s Blog</title>
+  <title>Archives: 2020/2 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Volatile   CAS  同步容器及并发容器  AQS  ThreadPool">
-<meta name="keywords" content="并发编程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java并发-知识总结">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;31&#x2F;java%E5%B9%B6%E5%8F%91-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93&#x2F;index.html">
+  <meta name="description" content="技术、生活博客">
+<meta name="keywords" content="Java,SpringBoot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deng&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;02&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="Volatile   CAS  同步容器及并发容器  AQS  ThreadPool">
+<meta property="og:description" content="技术、生活博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;java%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%9C%E7%94%A8.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;Executor%E6%9E%B6%E6%9E%84.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
-<meta property="og:updated_time" content="2020-01-02T02:22:34.594Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;java%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -154,391 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-java并发-知识总结" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      java并发-知识总结
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/02/04/SpringBoot%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2020-02-04T02:51:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/02/04/SpringBoot%E5%9F%BA%E7%A1%80/">SpringBoot基础</a>
     </h1>
   
 
-        
-        <a href="/2019/12/31/java%E5%B9%B6%E5%8F%91-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2019-12-31T02:45:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>Volatile </p>
-</li>
-<li><p>CAS</p>
-</li>
-<li><p>同步容器及并发容器</p>
-</li>
-<li><p>AQS</p>
-</li>
-<li><p>ThreadPool</p>
-</li>
-</ul>
-<a id="more"></a>
-
-
-<h3 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h3><p>volatile是一个关键字，用于在并发编程中修饰变量</p>
-<p>volatile:java提供的一种<strong>弱</strong>同步机制</p>
-<ul>
-<li>轻量的同步机制，用来确保将变量的更新通知到其他线程</li>
-<li>保证可见性(禁止指令重排)、不保证原子性</li>
-</ul>
-<p><strong>如何保证可见性</strong></p>
-<ul>
-<li>变量声明为volatile类型后，编译器与运行时都会注意到这个变量时共享的，不会将该变量<br>上的操作和其他内存操作仪器重排序</li>
-<li>volatile变量不会被缓存在寄存器</li>
-</ul>
-<p><strong>指令重排</strong><br><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/java%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92.png" alt="指令重排"></p>
-<p>多线程环境中，线程交替运行，编译器优化重排的存在，两个线程中使用的变量无法保持一致性</p>
-<p><strong>JMM(Java内存模型)</strong></p>
-<p>JMM描述的是一组规范，通过规范来定义程序中各个变量的访问方式</p>
-<p>jmm同步规定:</p>
-<ul>
-<li>1.线程解锁前，必须把共享变量的值刷新回主内存</li>
-<li>2.线程加锁前，必须读取主内存的最新值到自己的工作内存</li>
-<li>3.加锁解锁是同一把锁</li>
-</ul>
-<p><strong>不保证原子性</strong></p>
-<p>原子性:不可分割、完整性，即某个线程正在做某个具体业务，中间不可以被加塞或者被分割，需要整体完整，<br>要么同时成功，要么同时失败</p>
-<p>使用AtomicInteger，synchronized 可以保证原子性</p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>CompareAndSet– 比较并设置(交换)</p>
-<p>CAS是一条CPU并发原语，体现在sun.misc.Unsafe类中各个方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">CompareAndSet</span><span class="params">(<span class="keyword">int</span> expectedValue,<span class="keyword">int</span> newValue)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> U.CompareAndSetInt(<span class="keyword">this</span>,VALUE,expectedValue,newValue);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> jdk.internal.misc.Unsafe U = jdk.internal.misc.Unsafe.getUnsafe();</span></pre></td></tr></table></figure>
-
-<p>原子变量是一种更好的“volatile”</p>
-<p>原子变量比锁的力度更细，量级更轻</p>
-<p>AtomicInteger,AtomicLong,AtomicBoolean,AtomicReference</p>
-<p><strong>CAS的缺点</strong></p>
-<ul>
-<li>1.循环时间长，开销大(CAS长时间不成功)</li>
-<li>2.只能保证一个共享变量的原子操作</li>
-<li>3.ABA问题</li>
-</ul>
-<p><strong>解决ABA问题</strong></p>
-<p>AtomicStampedReference</p>
-<p>并发容器类(ConcurrentHashMap,CopyOnWriteArrayList)代替同步容器类(Hashtable,Vector)</p>
-<p>CopyOnWriteArrayList的操作,读写分离</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">final</span> ReentrantLock lock=<span class="keyword">this</span>.lock();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    lokc.lock();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">try</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        Object[] elements=getArray();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> len=elements.length;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        Object[] newElements=Arrays.copyof(elements,len+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        newElements[len]=e;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        setArray(newElements);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        lock.unlock();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-
-<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p><font color="red">公平锁，非公平锁</font></p>
-<p>ReentrantLock 默认是非公平锁，但是可以设置称为公平锁<br>synchronized 是非公平锁</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ReentrantLock</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    sync = <span class="keyword">new</span> NonfairSync();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过两个静态内部类来实现</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ReentrantLock</span><span class="params">(<span class="keyword">boolean</span> fair)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    sync = fair ? <span class="keyword">new</span> FairSync() : <span class="keyword">new</span> NonfairSync();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p><font color="red">可重入锁(递归锁)</font></p>
-<p>递归锁是指同一个线程外层函数获得锁之后，内层递归函数仍然能获取该锁的代码</p>
-<p>线程可以进入任何一个它已经拥有的锁所同步着的代码块</p>
-<p>ReentrantLock/Synchronized 就是典型的可重入锁</p>
-<p>重入锁进一步提升了加锁行为的封装性</p>
-<p><font color="red">独占锁(写锁)/共享锁(读锁)/互斥锁</font></p>
-<p>独占锁:该锁一次只能被一个线程持有(ReentrantLock,Synchronized)<br>共享锁:该锁可以被多个线程所持有(ReentrantReadWriteLock的读锁)</p>
-<p><font color="red">自旋锁(spinlock)</font></p>
-<p>尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁</p>
-<table>
-<thead>
-<tr>
-<th>锁</th>
-<th>synchronized</th>
-<th>lock</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>原始构成</td>
-<td>JVM,底层使用monitor对象完成</td>
-<td>具体类(java.util.concurrent.locks)</td>
-</tr>
-<tr>
-<td>中断</td>
-<td>不可中断</td>
-<td>可以中断</td>
-</tr>
-<tr>
-<td>加锁公平性</td>
-<td>非公平锁</td>
-<td>默认是非公平，构造传入true可以实现公平</td>
-</tr>
-<tr>
-<td>条件</td>
-<td>无条件</td>
-<td>Condition</td>
-</tr>
-</tbody></table>
-<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AbstractQueuedSynchronizer </p>
-<p>在java.util.concurrent</p>
-<ul>
-<li><p>ReentrantLock</p>
-</li>
-<li><p>ReentrantReadWriteLock</p>
-</li>
-<li><p>SynchronousQueue</p>
-</li>
-<li><p>FutureTask</p>
-</li>
-<li><p>CountDownLatch</p>
-</li>
-<li><p>Semaphore</p>
-</li>
-<li><p>CyclicBarrier</p>
-</li>
-</ul>
-<p><strong>CountDownLatch</strong></p>
-<ul>
-<li>1.它允许一个或多个线程一直等待，知道其他线程的操作执行完后再执行。例如，应用程序的主线程希望在负责 启动框架服务的线程已经启动所有的框架服务之后再执行</li>
-<li><ol start="2">
-<li>CountDownLatch主要有两个方法，当一个或多个线程调用await()方法时，调用线程会被阻塞。其他线程调用 countDown()方法会将计数器减1，当计数器的值变为0时，因调用await()方法被阻塞的线程才会被唤醒，继续执行</li>
-</ol>
-</li>
-</ul>
-<p><strong>Semaphore</strong></p>
-<p>可以代替Synchronize 和Lock</p>
-<p>用于多个共享资源的互斥作用，另一个用于并发线程数的控制</p>
-<p><strong>CyclicBarrier</strong></p>
-<p>可循环(Cyclic)使用的屏障。让一组线程到达一个屏障(也可叫同步点)时被阻塞，知道最后一个线程到达屏 障时，屏障才会开门，所有被屏障拦截的线程才会继续干活，线程进入屏障通过CycliBarrier的await()方法</p>
-<p>可以设置循环使用</p>
-<h3 id="ThreadPool"><a href="#ThreadPool" class="headerlink" title="ThreadPool"></a>ThreadPool</h3><p><strong>阻塞队列</strong></p>
-<ul>
-<li>ArrayBlockingQueue,一个基于数组结构的有界阻塞队列,FIFO</li>
-<li>LinkedBlockingQueue,个基于链表结构的阻塞队列,FIFO，吞吐量高于ArrayBlockingQueue</li>
-<li>SynchronousQueue，一个不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量较高</li>
-</ul>
-<p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%9C%E7%94%A8.png" alt="阻塞队列"></p>
-<p>在多线程领域:所谓<strong>阻塞</strong>，在某些情况下会挂起线程，一旦满足条件，被挂起的线程又会自动被唤醒</p>
-<p>使用阻塞队列BlockingQueue时我们不需要关心什么时候需要阻塞线程，什么时候需要唤醒线程，因为这一切BlockingQueue都可自行处理</p>
-<p><strong>阻塞队列的各种方法</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法类型</th>
-<th>阻塞</th>
-<th>抛出异常</th>
-<th>特殊值</th>
-<th>超时</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>插入</td>
-<td>put(e)</td>
-<td>add(e)</td>
-<td>offer(e)</td>
-<td>offer(e,time,unit)</td>
-</tr>
-<tr>
-<td>移除</td>
-<td>take()</td>
-<td>remove()</td>
-<td>poll()</td>
-<td>poll(time,unit)</td>
-</tr>
-<tr>
-<td>检查</td>
-<td>~</td>
-<td>element()</td>
-<td>peek()</td>
-<td>~</td>
-</tr>
-</tbody></table>
-<p><strong>线程池</strong></p>
-<p>线程池主要是用来控制线程的数量，处理过程中将任务放进队列，然后在线程创建后启动给这些任 务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中取出任务来 执行</p>
-<ul>
-<li>线程复用,降低线程创建和销毁造成的的资源消耗</li>
-<li>控制最大并发数</li>
-<li>管理线程，提升响应速度，任务到达不需要等待线程创建的过程</li>
-</ul>
-<p>几个线程池的实现</p>
-<ul>
-<li>Executors.newFixedThreadPool(int) </li>
-<li>Executors.newSingleThreadExecutor()</li>
-<li>Executors.newCachedThreadPool()</li>
-</ul>
-<p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Executor%E6%9E%B6%E6%9E%84.png" alt="Executor"></p>
-<p><strong>ThreadPoolExecutor</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span></span></span></pre></td></tr></table></figure>
-<ul>
-<li><p>corePoolSize,线程池中常驻核心线程数<br>在创建了线程池后，当有请求任务来之后，就会安排池中的线程去执行请求任务<br> 当线程池的线程数达到corePoolSize后，就会把到达的任务放到缓存队列当中</p>
-</li>
-<li><p>maximumPoolSize,线程池能够容纳同时执行的最大线程数，必须大于等于1</p>
-</li>
-<li><p>keepAliveTime,多余空闲线程的存活时间</p>
-</li>
-<li><p>unit, 存活的时间单位 (TimeUnit.)</p>
-</li>
-<li><p>workQueue,任务队列，被提交但是尚未被执行的任务</p>
-</li>
-<li><p>threadFactory,表示生成线程池中工作线程的线程工厂,默认即可</p>
-</li>
-<li><p>handler,拒绝策略</p>
-</li>
-</ul>
-<p><strong>RejectedExecutionHandler 拒绝策略</strong></p>
-<p>当线程全部占用，等待队列已经全部排满，无法接纳新的任务，需要拒绝策略机制来合理的处理这个问题</p>
-<ul>
-<li><p>AbortPolicy 默认,直接抛出RejectedExecutionException异常阻止系统正常运行</p>
-</li>
-<li><p>CallerRunsPolicy,将任务回退到调用者</p>
-</li>
-<li><p>DiscardOldestPolicy,抛弃队列中等待最久的任务，然后把当前任务加入队列中尝试再次提交当前任务</p>
-</li>
-<li><p>DiscardPolicy,直接丢弃任务</p>
-</li>
-</ul>
-<p><strong>线程池创建</strong></p>
-<ul>
-<li>线程池<font color="red">不允许</font>&gt;使用Executors创建</li>
-<li>通过ThreadPoolExecutor的方式，规避资源耗尽风险</li>
-<li>FixedThreadPool和SingleThreadPool允许请求队列长度为Integer.MAX_VALUE可能会堆积大量请求</li>
-<li>CachedThreadPool和ScheduledThreadPool允许的创建线程数量为Integer.MAX_VALUE，可能会创建大量线程，导致OOM</li>
-</ul>
-<p>线程池的工作流程</p>
-<p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" alt="线程池的工作流程"></p>
-<p><strong>配置线程池</strong></p>
-<ul>
-<li><p>CPU密集型,大量的运算，基本不会出现阻塞，线程池=CPU核心数+1</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num_cpu=Runtime.getRuntime().availableProcessors();  <span class="comment">// cpu的核心数</span></span></pre></td></tr></table></figure>
-</li>
-<li><p>IO密集型,会出现阻塞，尽可能多的配置多的线程<br>估算出任务的等待时间与计算时间的比值</p>
-</li>
-</ul>
-<p>CPU核心数/(1-阻塞系数)  ,阻塞系数0.8～0.9之间</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/31/java%E5%B9%B6%E5%8F%91-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/01/05/%E9%87%91%E8%9E%8D-%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          金融-入门知识
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/12/27/Git/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -565,8 +228,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
