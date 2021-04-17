@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Spring-AOP | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="AOP: Aspect Oriented Programm 面向切面编程 Spring框架  IOC AOP 轻量级服务抽象   AOP的实现1AOP有多种实现，常见的有23AspectJ: 语言拓展型实现AOP，支持丰富、完整4SpringAOP: 采用Java作为AOP的实现语言(AOL)   AOP实现机制1SpringAOP发现对象实现相应interface2使用动态代理机制34如果目标对">
+  <meta name="description" content="AOP: Aspect Oriented Programm 面向切面编程 Spring框架  IOC AOP 轻量级服务抽象">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring-AOP">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;04&#x2F;17&#x2F;Spring-AOP&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="AOP: Aspect Oriented Programm 面向切面编程 Spring框架  IOC AOP 轻量级服务抽象   AOP的实现1AOP有多种实现，常见的有23AspectJ: 语言拓展型实现AOP，支持丰富、完整4SpringAOP: 采用Java作为AOP的实现语言(AOL)   AOP实现机制1SpringAOP发现对象实现相应interface2使用动态代理机制34如果目标对">
+<meta property="og:description" content="AOP: Aspect Oriented Programm 面向切面编程 Spring框架  IOC AOP 轻量级服务抽象">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;s3-us-west-2.amazonaws.com&#x2F;secure.notion-static.com&#x2F;4dc95f25-f1cd-4453-8a3c-f936f039e31a&#x2F;Screen_Shot_2021-04-08_at_9.15.20_PM.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;s3-us-west-2.amazonaws.com&#x2F;secure.notion-static.com&#x2F;f8518462-c60c-4b96-9fd3-b0e3bda859fb&#x2F;Screen_Shot_2021-04-09_at_10.30.18_PM.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;s3-us-west-2.amazonaws.com&#x2F;secure.notion-static.com&#x2F;13c5017c-3472-441a-ae3e-e9f0c4ca551a&#x2F;Screen_Shot_2021-04-09_at_10.48.37_PM.png">
-<meta property="og:updated_time" content="2021-04-17T02:44:34.076Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.notion.so&#x2F;AOP-d21ab467f8764ce5a60e982e7f735508#7ae46dae2e8e45ebb602187588e742c6">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.notion.so&#x2F;AOP-d21ab467f8764ce5a60e982e7f735508#223a171eb6794f2198cc60014841caad">
+<meta property="og:updated_time" content="2021-04-17T02:56:37.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;s3-us-west-2.amazonaws.com&#x2F;secure.notion-static.com&#x2F;4dc95f25-f1cd-4453-8a3c-f936f039e31a&#x2F;Screen_Shot_2021-04-08_at_9.15.20_PM.png">
   
@@ -180,10 +180,12 @@
 <li>AOP</li>
 <li>轻量级服务抽象</li>
 </ul>
+<a id="more"></a>
+
 <p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4dc95f25-f1cd-4453-8a3c-f936f039e31a/Screen_Shot_2021-04-08_at_9.15.20_PM.png" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4dc95f25-f1cd-4453-8a3c-f936f039e31a/Screen_Shot_2021-04-08_at_9.15.20_PM.png"></p>
 <h2 id="AOP的实现"><a href="#AOP的实现" class="headerlink" title="AOP的实现"></a>AOP的实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">AOP有多种实现，常见的有</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">AspectJ: 语言拓展型实现AOP，支持丰富、完整</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">SpringAOP: 采用Java作为AOP的实现语言(AOL)</span></pre></td></tr></table></figure>
 
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f8518462-c60c-4b96-9fd3-b0e3bda859fb/Screen_Shot_2021-04-09_at_10.30.18_PM.png" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f8518462-c60c-4b96-9fd3-b0e3bda859fb/Screen_Shot_2021-04-09_at_10.30.18_PM.png"></p>
+<p><img src="https://www.notion.so/AOP-d21ab467f8764ce5a60e982e7f735508#7ae46dae2e8e45ebb602187588e742c6" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f8518462-c60c-4b96-9fd3-b0e3bda859fb/Screen_Shot_2021-04-09_at_10.30.18_PM.png"></p>
 <h2 id="AOP实现机制"><a href="#AOP实现机制" class="headerlink" title="AOP实现机制"></a>AOP实现机制</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SpringAOP发现对象实现相应<span class="class"><span class="keyword">interface</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class">使用动态代理机制</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="class"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="class">如果目标对象没有实现<span class="title">interface</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="class">使用<span class="title">CGLIB</span>(<span class="title">code</span> <span class="title">generation</span> <span class="title">library</span>)动态字节码生成类库，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="class">生成动态的代理对象实例</span></span></pre></td></tr></table></figure>
 
 <h2 id="动态代理机制"><a href="#动态代理机制" class="headerlink" title="动态代理机制"></a><a href="https://www.notion.so/ef5a9295d1534d35b9ead68cb0ef4abc" target="_blank" rel="noopener"><strong>动态代理机制</strong></a></h2><p>动态代理的缺点：</p>
@@ -193,7 +195,7 @@
 </ul>
 <h2 id="CGLIB字节码生成"><a href="#CGLIB字节码生成" class="headerlink" title="CGLIB字节码生成"></a>CGLIB字节码生成</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">直接对目标对象类进行继承拓展</span></pre></td></tr></table></figure>
 
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/13c5017c-3472-441a-ae3e-e9f0c4ca551a/Screen_Shot_2021-04-09_at_10.48.37_PM.png" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/13c5017c-3472-441a-ae3e-e9f0c4ca551a/Screen_Shot_2021-04-09_at_10.48.37_PM.png"></p>
+<p><img src="https://www.notion.so/AOP-d21ab467f8764ce5a60e982e7f735508#223a171eb6794f2198cc60014841caad" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/13c5017c-3472-441a-ae3e-e9f0c4ca551a/Screen_Shot_2021-04-09_at_10.48.37_PM.png"></p>
 <h2 id="AOP中的概念"><a href="#AOP中的概念" class="headerlink" title="AOP中的概念"></a>AOP中的概念</h2><ul>
 <li>JointPoint</li>
 <li>PointCut</li>
@@ -435,7 +437,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">C基础</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -443,7 +445,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Java;</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">C基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,7 +461,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Java;</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,11 +469,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -483,11 +489,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">平衡树;随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">设计模式;工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,11 +497,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">设计模式;工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">平衡树;随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,7 +509,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">并发编程;线程池</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,15 +521,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">设计模式，设计原则</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">金融</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">设计模式，设计原则</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,7 +533,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">面经</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">并发编程;线程池</a>
               </li>
             
             <div class="clearfix"></div>
