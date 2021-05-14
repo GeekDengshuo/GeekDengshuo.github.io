@@ -9,15 +9,18 @@
   <title>SpringMVC基础知识 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="SpringMVC1SpringMVC是基于Web MVC设计模式的请求驱动类型的轻量级Web框架；23SpringMVC在Web应用中充当控制层Controller的角色45MVC模式:(Model-View-Controller):为了解决页面代码和后台代码的分离    0x01.SpringMVC请求流程 0x02.SpringMVC组件 0x03.SpringMVC核心 0x04.Spri">
-<meta name="keywords" content="Spring ; SpringMVC">
+<meta name="keywords" content="SpringMVC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC基础知识">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;05&#x2F;12&#x2F;SpringMVC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
 <meta property="og:description" content="SpringMVC1SpringMVC是基于Web MVC设计模式的请求驱动类型的轻量级Web框架；23SpringMVC在Web应用中充当控制层Controller的角色45MVC模式:(Model-View-Controller):为了解决页面代码和后台代码的分离    0x01.SpringMVC请求流程 0x02.SpringMVC组件 0x03.SpringMVC核心 0x04.Spri">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-05-12T14:10:38.416Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;SpringMVC&#x2F;SpringMVC.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;SpringMVC&#x2F;DispatcherServlet.png">
+<meta property="og:updated_time" content="2021-05-14T14:59:19.512Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;SpringMVC&#x2F;SpringMVC.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -179,23 +182,18 @@
 <li>0x04.SpringMVC启动</li>
 <li>0x05.SpringMVC方法</li>
 </ul>
-<!--more -- >
+<a id="more"></a>
 
-### 0x01.SpringMVC请求流程
-
-![](https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SpringMVC/SpringMVC.png)
-
-### 0x02.SpringMVC组件
-
-![](https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SpringMVC/DispatcherServlet.png)
-
-- DispatcherServlet 前端控制器-框架提供，在web.xml中配置，用于接收请求，响应结果，相当于转发器，中央处理器
-- HandlerMapping  请求处理器-框架提供，根据请求uri查找处理器(controller)，可以用XML或注解来映射
-- HandlerAdapter 处理器适配器-框架提供，按照特定规则（HandlerAdapter要求的规则）去执行Handler
-- Handler 处理器- 开发，也叫后端控制器Controller
-- ViewResolver 视图解析器- 框架提供,进行视图解析，把逻辑视图名解析成真正的物理视图
-- View 视图- 开发,数据展现给用户的页面,View是一个接口，实现类支持不同的View技术（jsp、freemarker)
-
+<h3 id="0x01-SpringMVC请求流程"><a href="#0x01-SpringMVC请求流程" class="headerlink" title="0x01.SpringMVC请求流程"></a>0x01.SpringMVC请求流程</h3><p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SpringMVC/SpringMVC.png" alt=""></p>
+<h3 id="0x02-SpringMVC组件"><a href="#0x02-SpringMVC组件" class="headerlink" title="0x02.SpringMVC组件"></a>0x02.SpringMVC组件</h3><p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SpringMVC/DispatcherServlet.png" alt=""></p>
+<ul>
+<li>DispatcherServlet 前端控制器-框架提供，在web.xml中配置，用于接收请求，响应结果，相当于转发器，中央处理器</li>
+<li>HandlerMapping  请求处理器-框架提供，根据请求uri查找处理器(controller)，可以用XML或注解来映射</li>
+<li>HandlerAdapter 处理器适配器-框架提供，按照特定规则（HandlerAdapter要求的规则）去执行Handler</li>
+<li>Handler 处理器- 开发，也叫后端控制器Controller</li>
+<li>ViewResolver 视图解析器- 框架提供,进行视图解析，把逻辑视图名解析成真正的物理视图</li>
+<li>View 视图- 开发,数据展现给用户的页面,View是一个接口，实现类支持不同的View技术（jsp、freemarker)</li>
+</ul>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#spring-webmvc-4.3.5.RELEASE.jar</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#/org/springframework/web/servlet/DispatcherServlet.properties 的相关配置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Default implementation classes for DispatcherServlet's strategy interfaces.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Used as fallback when no matching beans are found in the DispatcherServlet context.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Not meant to be customized by application developers.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.LocaleResolver</span>=<span class="string">org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.ThemeResolver</span>=<span class="string">org.springframework.web.servlet.theme.FixedThemeResolver</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.HandlerMapping</span>=<span class="string">org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping,\</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="attr">org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.HandlerAdapter</span>=<span class="string">org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter,\</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter,\</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="attr">org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.HandlerExceptionResolver</span>=<span class="string">org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver,\</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver,\</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="attr">org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.RequestToViewNameTranslator</span>=<span class="string">org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.ViewResolver</span>=<span class="string">org.springframework.web.servlet.view.InternalResourceViewResolver</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="meta">org.springframework.web.servlet.FlashMapManager</span>=<span class="string">org.springframework.web.servlet.support.SessionFlashMapManager</span></span></pre></td></tr></table></figure>
 
 
@@ -280,7 +278,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">Spring ; SpringMVC</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">SpringMVC</a>
         		</li>
       		
 		</ul>
@@ -485,19 +483,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">平衡树;随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">C基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">总结</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,15 +499,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">Java;JVM</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,11 +523,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Spring;基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,19 +535,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">总结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">Spring ; SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">并发编程;线程池</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Spring;基础</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">平衡树;随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,6 +551,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">算法;</a>
               </li>
              
@@ -573,11 +563,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">金融</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">数据库;MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,19 +571,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">数据库;MySQL</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">金融</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">并发编程;线程池</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">SpringMVC</a>
               </li>
             
             <div class="clearfix"></div>
