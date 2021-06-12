@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/8 | Deng&#39;s Blog</title>
+  <title>浮点数+ 缓存+布隆过滤器 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术、生活博客">
+  <meta name="description" content="计算机是如何表示存储浮点数的？ 缓存的优点及缓存引入问题的解决方案?">
 <meta name="keywords" content="Java,SpringBoot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Deng&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;08&#x2F;index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浮点数+ 缓存+布隆过滤器">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;06&#x2F;12&#x2F;%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%BC%93%E5%AD%98-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="技术、生活博客">
+<meta property="og:description" content="计算机是如何表示存储浮点数的？ 缓存的优点及缓存引入问题的解决方案?">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;img_convert&#x2F;17e723be36658f6e7bdb0414a06e9594.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;img_convert&#x2F;9ba73b66e7e4fea7f2a134330e5c25c0.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;img_convert&#x2F;ea918e4cb724dda6055e86f0fbff1d75.webp?x-oss-process&#x3D;image&#x2F;format,png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;img_convert&#x2F;1969254daf8a87da2eb9de781e78e526.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%26%26%E7%BC%93%E5%AD%98%26%26%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8&#x2F;Screen%20Shot%202021-06-11%20at%2011.23.11%20PM.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;img_convert&#x2F;76cc9c19a5173e456c0fab5393e8697d.png">
+<meta property="og:updated_time" content="2021-06-12T02:36:40.937Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;img_convert&#x2F;17e723be36658f6e7bdb0414a06e9594.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -148,174 +156,259 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-浮点数-缓存-布隆过滤器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浮点数+ 缓存+布隆过滤器
+    </h1>
+  
+
+        
+        <a href="/2021/06/12/%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%BC%93%E5%AD%98-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2021-06-12T02:34:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-12</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>计算机是如何表示存储浮点数的？</p>
+<p>缓存的优点及缓存引入问题的解决方案?</p>
+<a id="more"></a>
+
+<h2 id="浮点数表示-amp-缓存-amp-布隆过滤器"><a href="#浮点数表示-amp-缓存-amp-布隆过滤器" class="headerlink" title="浮点数表示 &amp; 缓存 &amp; 布隆过滤器"></a>浮点数表示 &amp; 缓存 &amp; 布隆过滤器</h2><ul>
+<li>1.计算机是如何表示小数</li>
+<li>2.缓存</li>
+<li>3.布隆过滤器</li>
+</ul>
+<h3 id="1-浮点数的表示"><a href="#1-浮点数的表示" class="headerlink" title="1.浮点数的表示"></a>1.浮点数的表示</h3><p>引子: 我们先看一个错误示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        System.out.println(<span class="number">1f</span> == <span class="number">0.999999f</span>);          <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    System.out.println(<span class="number">1f</span> == <span class="number">0.9999999f</span>);         <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    System.out.println(<span class="number">1f</span> == <span class="number">0.99999999f</span>);        <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    System.out.println(<span class="number">1f</span> == <span class="number">0.999999999999f</span>);    <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><strong><font color = red>注意</font>:</strong> 不能使用 “==” 对浮点值进行判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">浮点数之间的等值判断，基本数据类型不能使用 &quot;&#x3D;&#x3D;&quot; ，包装数据类型不能使用 equals来判断  --- 阿里巴巴Java开发手册[强制]</span></pre></td></tr></table></figure>
+
+<p>为什么浮点数不能使用 “==” 判断 ？</p>
+<p><strong>计算机是如何表示小数的?</strong></p>
+<p><strong>十进制小数</strong><br>$$<br>D = \sum^{m}<em>{i=-n} d</em>{i} * 10^{i}<br>$$<br><strong>二进制小数</strong><br>$$<br>B = \sum_{i= -n}^{m} b_{i}<em>2^{i}<br>$$<br>*</em>IEEE-745浮点标准**<br>$$<br>V = (-1)^s * M *2^E<br>$$</p>
+<ul>
+<li>s 符号位</li>
+<li>M 阶码部分</li>
+<li>E 尾数部分</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/17e723be36658f6e7bdb0414a06e9594.png" alt=""></p>
+<p>符号s: 0正,1负</p>
+<p>阶码E： float 8bit(-128,127)  double 11bit(-1023,1024)</p>
+<p>尾数M：float 23bit   double 52bit</p>
+<p>$$<br>V = x * 2^y<br>$$<br><strong>根据exp的值，被编码的值可以分为三种</strong></p>
+<ul>
+<li>规格化的值</li>
+<li>非规格化的值</li>
+<li>特殊值</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/9ba73b66e7e4fea7f2a134330e5c25c0.png" alt=""></p>
+<p>1.规格化的值<br>$$<br>E = e - Bias<br>$$</p>
+<p>$$<br>M = 1+ f<br>$$</p>
+<ul>
+<li>e - exp表达式的值</li>
+<li>Bias </li>
+</ul>
+<p>$$<br>Bias = 2^{k-1} -1 ; (127,1023)<br>$$</p>
+<ul>
+<li>M - 调整阶码的值</li>
+</ul>
+<p>$$<br>1101.111 = 1.101111 * 2^{3}<br>$$</p>
+<p>案例example<br>$$<br>13.875_{10} = 1101.111_{2} = 1.101111_{2} * 2^{3}<br>$$</p>
+<p>$$<br>M = 1 +f<br>$$</p>
+<p>$$<br>f = 1011111<br>$$</p>
+<p>$$<br>e = E + Bias = 3 + 127 = 130_{10} = 10000010_{2}<br>$$</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>13.875</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Sign</strong>  <strong>Exponent</strong>  <strong>Mantissa</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>0x415E0000 =</strong> <strong>01000001 01011110</strong> <strong>00000000 00000000</strong>                                                                                                                                                                                                                               <strong>0</strong>  <strong>10000010</strong>  <strong>10111100000000000000000</strong></td>
+</tr>
+</tbody></table>
+<p><a href="http://www.binaryconvert.com/convert_float.html" target="_blank" rel="noopener">浮点数在线转换</a></p>
+<p>2.非规格化的值<br>$$<br>E = 1- Bias<br>$$</p>
+<p>$$<br>M = f<br>$$</p>
+<p> 3.特殊值</p>
+<p>a.当exp全部为1,小数域全为0，表示无穷</p>
+<p>b.当exp全部为1,小数域frac不等于0,表示NaN(not a number)</p>
+<h3 id="2-缓存"><a href="#2-缓存" class="headerlink" title="2.缓存"></a>2.缓存</h3><p>应用缓存 -&gt;性能优化案例:</p>
+<ul>
+<li>操作系统</li>
+<li>数据库</li>
+<li>分布式缓存</li>
+<li>本地缓存</li>
+</ul>
+<p>缓存目的: 弥补cpu高算力和IO读写慢之间的鸿沟</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ea918e4cb724dda6055e86f0fbff1d75.webp?x-oss-process=image/format,png" alt=""></p>
+<p><strong>缓存</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/1969254daf8a87da2eb9de781e78e526.png" alt=""></p>
+<p><strong>缓存问题</strong></p>
+<img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%26%26%E7%BC%93%E5%AD%98%26%26%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/Screen%20Shot%202021-06-11%20at%2011.23.11%20PM.png" style="zoom:80%;" />
+
+
+
+<h3 id="3-布隆过滤器"><a href="#3-布隆过滤器" class="headerlink" title="3.布隆过滤器"></a>3.布隆过滤器</h3><p>如何判断一个元素是否已经存在?</p>
+<p>1.set集合</p>
+<p>2.数据+hash  ， index = hash(xx) % table.length</p>
+<p>3.Bloom Filter </p>
+<p>布隆过滤器:</p>
+<ul>
+<li><p>减少hash冲突，优化hash函数(多个hash实现)</p>
+</li>
+<li><p>增加数组长度</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/76cc9c19a5173e456c0fab5393e8697d.png" alt=""></p>
+</li>
+</ul>
+<p>  假设用100w的数据量</p>
+<ul>
+<li><p>使用int数组</p>
+<p>$$<br>1<em>10^{6} * 4 (Byte) = 4</em>10^{6}/1024 = 4000k<br>$$</p>
+</li>
+</ul>
+<ul>
+<li><p>使用位数组</p>
+<p>$$<br>1*10^{6} / 8 = 125000(byte) = 127k<br>$$</p>
+</li>
+</ul>
+<p><font color = green>布隆过滤器的判断方法</font></p>
+<ul>
+<li>布隆过滤器判定某个元素存在，其实有可能存在(hash冲突)</li>
+<li>布隆过滤器判定某个元素不存在，则<font color = red>一定不存在</font></li>
+</ul>
+<p>布隆过滤器的使用场景</p>
+<ul>
+<li>判断数据在海量数据中是否存在，防止缓存穿透</li>
+<li>判定某个URL是否已经处理过</li>
+</ul>
+<p>布隆过滤器的实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> src.bloomFilter;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.BitSet;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@Author</span> deng shuo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 6/12/21 10:07</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBloomFilter</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_SIZE = <span class="number">2</span> &lt;&lt; <span class="number">24</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] SEEDS = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">3</span>,<span class="number">13</span>,<span class="number">46</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> BitSet bits = <span class="keyword">new</span> BitSet(DEFAULT_SIZE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> SimpleHash[] func = <span class="keyword">new</span> SimpleHash[SEEDS.length];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyBloomFilter</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; SEEDS.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            func[i] = <span class="keyword">new</span> SimpleHash(DEFAULT_SIZE,SEEDS[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Object value)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(SimpleHash f: func)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            bits.set(f.hash(value),<span class="keyword">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object value)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">boolean</span> res = <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(SimpleHash f:func)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            res = bits.get(f.hash(value));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(!res)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleHash</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> cap;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> seed;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">SimpleHash</span><span class="params">(<span class="keyword">int</span> cap ,<span class="keyword">int</span> seed)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">this</span>.cap = cap;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">this</span>.seed = seed;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object value)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> h;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> (value == <span class="keyword">null</span>) ? <span class="number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">                    Math.abs(seed*(cap -<span class="number">1</span>) &amp; (h=value.hashCode())^(h&gt;&gt;&gt;<span class="number">16</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><strong>Guava工具库实现布隆过滤器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &lt;groupId&gt;com.google.guava&lt;&#x2F;groupId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    &lt;artifactId&gt;guava&lt;&#x2F;artifactId&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &lt;version&gt;27.0.1-jre&lt;&#x2F;version&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;dependency&gt;</span></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建布隆过滤器对象，最多元素数量为10000，期望误报概率为0.01</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">BloomFilter&lt;Integer&gt; filter = BloomFilter.create(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        Funnels.integerFunnel(), <span class="number">10000</span>, <span class="number">0.01</span>);</span></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/29/RE%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-08-29T07:16:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/29/RE%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">RE正则表达式</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">RE; Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
-          
-
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/06/12/%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%BC%93%E5%AD%98-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/17/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%AE%97%E6%B3%95-%E5%BF%AB%E9%80%9F%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-08-17T14:43:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/26/Reactor%E6%A8%A1%E5%BC%8F%E5%8F%8ANIO/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Reactor模式及NIO</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/17/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%AE%97%E6%B3%95-%E5%BF%AB%E9%80%9F%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/">有趣的算法-快速解决问题</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">算法;</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/16/%E4%BD%8D%E5%9B%BE%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BD%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-08-16T00:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/16/%E4%BD%8D%E5%9B%BE%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BD%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">位图数据结构-位排序算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">算法;位排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/03/C-C-%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2020-08-03T13:13:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/03/C-C-%E5%9F%BA%E7%A1%80/">C/C++基础</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">C基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -342,8 +435,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

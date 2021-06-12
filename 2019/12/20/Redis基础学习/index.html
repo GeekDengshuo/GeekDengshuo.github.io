@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Deng&#39;s Blog">
 <meta property="og:description" content="REmote DIctionary Server 远程字典服务器 典型的NoSQL内存键值数据库 主要内容: 数据库的发展及NoSQL Redis的基本操作">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-28T02:34:17.338Z">
+<meta property="og:updated_time" content="2021-05-29T02:33:16.116Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
@@ -176,7 +176,7 @@
 <p>Redis的基本操作</p>
 <a id="more"></a>
 
-<h3 id="数据库的发展"><a href="#数据库的发展" class="headerlink" title="数据库的发展"></a>数据库的发展</h3><ul>
+<h3 id="1-数据库的发展"><a href="#1-数据库的发展" class="headerlink" title="1.数据库的发展"></a>1.数据库的发展</h3><ul>
 <li>1.单机的MySQL</li>
 <li>2.Memcached+MySQL+垂直拆分</li>
 <li>3.MySQL主从读写分离</li>
@@ -196,7 +196,7 @@
 <li>高可扩</li>
 <li>高性能(单点备份，容灾备份)</li>
 </ul>
-<h3 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h3><p>not only SQL</p>
+<h4 id="1-1NoSQL"><a href="#1-1NoSQL" class="headerlink" title="1.1NoSQL"></a>1.1NoSQL</h4><p>not only SQL</p>
 <ul>
 <li>非关系型数据库</li>
 <li>无需固定模式，无需多余操作就可以横向拓展</li>
@@ -224,60 +224,66 @@
 <li>CA,传统的数据库(MySQL,Oracle)</li>
 </ul>
 <p>AP 就是让系统放松某一刻数据一致性要求，来换取系统整体的伸缩性和性能改观</p>
-<h3 id="分布式与集群"><a href="#分布式与集群" class="headerlink" title="分布式与集群"></a>分布式与集群</h3><p><strong>分布式:</strong></p>
+<h4 id="1-2分布式与集群"><a href="#1-2分布式与集群" class="headerlink" title="1.2分布式与集群"></a>1.2分布式与集群</h4><p><strong>分布式:</strong></p>
 <p>不同的多台服务器上部署<strong>不同的服务模块</strong>,之间通过RPC/RMI通信和调用，对外提供服务和组内协作</p>
 <p><strong>集群:</strong></p>
 <p>不同的多台服务器部署<strong>相同的模块</strong>通过分布调度软件进行统一调度</p>
-<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><p>高性能Key/Value分布式内存系统</p>
+<p><strong>Redis</strong></p>
+<p>高性能Key/Value分布式内存系统</p>
 <ul>
-<li>1.key-value,常见的key:list,set,zset,string,hash</li>
+<li>1.key-value,常见的value:list,set,zset,string,hash</li>
 <li>2.Persistance 持久化</li>
 <li>3.Redis支持数据备份,Master-Slave模式的数据备份</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ps -ef|grep redis</span></pre></td></tr></table></figure>
 
-<p>Redis</p>
-<ul>
+
+
+<h3 id="2-Redis"><a href="#2-Redis" class="headerlink" title="2.Redis"></a>2.Redis</h3><ul>
 <li>单进程，读写事件响应是对Epoll函数的包装</li>
 <li>默认是16个库,使用Select num 进行直接切换</li>
 <li>端口是6379</li>
 </ul>
-<p>一些简单的Redis数据库的操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">dbsize        &#x2F;&#x2F; 当前数据库key的数量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">select        &#x2F;&#x2F; 命令切换库  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">FLUSHDB       &#x2F;&#x2F; 当前库清理key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">FLUSHALL      &#x2F;&#x2F; 全部库的key清理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;********Key的操作************&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">keys *        &#x2F;&#x2F; 查看全部的key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">exists key    &#x2F;&#x2F; 判断键是否存在</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">move key db   &#x2F;&#x2F; 移动道目的库，当前库的key-value值都被移动</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">expire key    &#x2F;&#x2F; 为给定的key设置过期时间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">ttl   key     &#x2F;&#x2F; 查看还剩多少时间过期  -1 表示永不过期，-2 表示已过期</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">type key      &#x2F;&#x2F; 查看键的类型(下面的五大数据类型)</span></pre></td></tr></table></figure>
+<h4 id="2-1Redis数据库的操作"><a href="#2-1Redis数据库的操作" class="headerlink" title="2.1Redis数据库的操作"></a>2.1Redis数据库的操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">dbsize        &#x2F;&#x2F; 当前数据库key的数量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">select        &#x2F;&#x2F; 命令切换库  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">FLUSHDB       &#x2F;&#x2F; 当前库清理key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">FLUSHALL      &#x2F;&#x2F; 全部库的key清理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;********Key的操作************&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">keys *        &#x2F;&#x2F; 查看全部的key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">exists key    &#x2F;&#x2F; 判断键是否存在</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">move key db   &#x2F;&#x2F; 移动道目的库，当前库的key-value值都被移动</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">expire key    &#x2F;&#x2F; 为给定的key设置过期时间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">ttl   key     &#x2F;&#x2F; 查看还剩多少时间过期  -1 表示永不过期，-2 表示已过期</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">type key      &#x2F;&#x2F; 查看键的类型(下面的五大数据类型)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">OBJECT ENCODING key &#x2F;&#x2F; 查看对象的编码方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#x2F;**********  通用指令 *******&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">DEL  EXPIRE RENAME TYPE OBJECT</span></pre></td></tr></table></figure>
 
-<p>Redis的数据类型</p>
-<table>
+<h4 id="2-2Redis的数据类型"><a href="#2-2Redis的数据类型" class="headerlink" title="2.2Redis的数据类型"></a>2.2Redis的数据类型</h4><table>
 <thead>
 <tr>
 <th>数据类型</th>
 <th>存储的值</th>
 <th>基本操作</th>
+<th>编码类型</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>STRING</td>
+<td>REDIS_STRING 字符串对象</td>
 <td>字符串、整数或者浮点数</td>
 <td>对整个字符串或者字符串的其中一部分执行操作 对整数和浮点数执行自增或者自减操作</td>
+<td>REDIS_ENCODING_INT、REDIS_ENCODING_EMBSTR、REDIS_ENCODING_RAW</td>
 </tr>
 <tr>
-<td>LIST</td>
+<td>REDIS_LIST   列表对象</td>
 <td>列表</td>
 <td>从两端压入或者弹出元素 对单个或者多个元素进行修剪，只保留一个范围内的元素</td>
+<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_LINKEDLIST</td>
 </tr>
 <tr>
-<td>SET</td>
+<td>REDIS_SET   集合对象</td>
 <td>无序集合</td>
 <td>添加、获取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合里面随机获取元素</td>
+<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_HT</td>
 </tr>
 <tr>
-<td>HASH</td>
+<td>REDIS_HASH    哈希对象</td>
 <td>包含键值对的无序散列表</td>
 <td>添加、获取、移除单个键值对 获取所有键值对 检查某个键是否存在</td>
+<td>REDIS_ENCODING_INTSET、REDIS_ENCODING_HT</td>
 </tr>
 <tr>
-<td>ZSET</td>
+<td>REDIS_ZSET    有序集合对象</td>
 <td>有序集合</td>
 <td>添加、获取、删除元素 根据分值范围或者成员来获取元素 计算一个键的排名</td>
+<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_SKIPLIST</td>
 </tr>
 </tbody></table>
 <p>其中<strong>HASH</strong>是最主要，也是应用最多的的数据类型结构</p>
@@ -344,22 +350,57 @@
 
 
 
+<h4 id="2-3Redis持久化"><a href="#2-3Redis持久化" class="headerlink" title="2.3Redis持久化"></a>2.3Redis持久化</h4><p>redis是内存数据库，数据库状态存储在内存里面，需要将内存的数据持久化保存到磁盘里面。</p>
+<p>redis提供了两种持久化方式</p>
+<ul>
+<li>RDB</li>
+<li>AOF</li>
+</ul>
+<p><strong>RDB(Redis DataBase)</strong></p>
+<p>RDB是一种snapshot快照的方式，将内存中的键值对数据保存到RDB文件(dump.rdb)，恢复是直接将RDB文件读入内存。</p>
+<p><strong>触发RDB文件生成的指令</strong></p>
+<ul>
+<li>SAVE</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 自动触发方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; redis.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;* save &lt;seconds&gt;  &lt;changes&gt; *&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">save  900 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">save  300 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">save  60  10000</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 手动触发方式 save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 手动触发方式 bgsave</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; save</span></pre></td></tr></table></figure>
+
+<ul>
+<li>禁用RDB持久化</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; redis.config</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">save &quot;&quot;</span></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>RDB的优缺点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">优点:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">1.RDB是一个非常紧凑(compact)的文件，它保存了redis 在某个时间点上的数据集。这种文件非常适合用于进行备份和灾难恢复。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.生成RDB文件的时候，redis主进程会fork()一个子进程来处理所有保存工作，主进程不需要进行任何磁盘IO操作。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">3.RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">缺点:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">1、RDB方式数据没办法做到实时持久化&#x2F;秒级持久化。因为bgsave每次运行都要执行fork操作创建子进程，属于重量级操作，如果不采用压缩算法(内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑)，频繁执行成本过高(影响性能)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">2、RDB文件使用特定二进制格式保存，Redis版本演进过程中有多个格式的RDB版本，存在老版本Redis服务无法兼容新版RDB格式的问题(版本不兼容)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">3、在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改(数据有丢失)</span></pre></td></tr></table></figure>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+<p><strong>AOF(Append Of File)</strong></p>
+<p>通过保存Redis服务器所执行的写指令来记录数据库状态</p>
+<p><strong>AOF实现步骤</strong></p>
+<ul>
+<li>命令追加</li>
+<li>文件写入</li>
+<li>文件同步</li>
+</ul>
+<p><strong>AOF重写</strong></p>
+<p>aof rewrite，不仅仅是对现有的AOF文件进行读取、分析和写入</p>
+<p>而是创新一个新的AOF文件直接读取服务器当前数据库，并将新的AOF文件代替之前的AOF文件</p>
+<p>并利用AOF重写缓冲区解决数据不一致问题</p>
+<p>AOF重写过程中的流程</p>
+<ul>
+<li>1.子进程进行aof文件重写期间，服务进程(父进程)可以继续处理命令请求</li>
+<li>2.父进程执行客户端的命令，将执行后写命令追加到<font color = green>AOF缓冲区</font></li>
+<li>3.将执行后的写命令追加到<font color = green>AOF重写缓冲区</font></li>
+<li>4.从创建子进程开始，服务区执行的写命令都会记录到AOF重写缓冲区里面</li>
+<li>5.子进程执行AOF重写,向父进程发送信号，AOF重写缓冲区的所有内容写入到AOF文件中</li>
+<li>6.原子地(atomic)覆盖现有的AOF文件</li>
+</ul>
 
       
 
@@ -595,15 +636,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,31 +652,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Linux,命令行</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">SpringBoot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Spring;基础</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,7 +660,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">SpringMVC</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Spring;基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,11 +688,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">算法;位排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Linux,命令行</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,15 +708,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">JVM,虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">算法;</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
               </li>
              
               <li class="article-tag-list-item">
