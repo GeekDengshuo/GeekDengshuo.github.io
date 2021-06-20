@@ -6,17 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>面经汇总 | Deng&#39;s Blog</title>
+  <title>Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面试经验">
-<meta name="keywords" content="面经">
-<meta property="og:type" content="article">
-<meta property="og:title" content="面经汇总">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;10&#x2F;%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB&#x2F;index.html">
+  <meta name="description" content="技术、生活博客">
+<meta name="keywords" content="Java,SpringBoot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deng&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;5&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="面试经验">
+<meta property="og:description" content="技术、生活博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-15T13:04:42.228Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
@@ -149,107 +148,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-面经汇总" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      面经汇总
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/30/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2020/05/10/%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/" class="archive-article-date">
-  	<time datetime="2020-05-10T02:10:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
+        <a href="/2019/11/30/hello-world/" class="archive-article-date">
+  	<time datetime="2019-11-30T08:57:22.321Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>面试经验</p>
-<a id="more"></a>
-
-
-<h4 id="中信银行"><a href="#中信银行" class="headerlink" title="中信银行"></a>中信银行</h4><p>自我介绍</p>
-<p>各位面试官，您们好，我叫邓烁，是燕山大学2020届机电工程学院的一名硕士研究生，本人在生活和学习上积极向上，入党五年<br>并担任支部书记，以一名党员身份严格要求自己，性格上乐观开朗，爱好运动，多次参与马拉松比赛和组织参与山地车骑行运动，<br>能积极参与团队合作，具有快速学习能力。</p>
-<p>1.==和equals()的区别？</p>
-<p>答:对于基础类型,==判断两个值是否相等<br>   对于引用类型，==判断是否引用同一个对象，equals判断对象是否等价</p>
-<p>2.数组和链表的相互转化</p>
-<p>答:数组-&gt;链表,主要是如何创建链表(root==other-&gt;temp)<br>   链表-&gt;数组,创建数组(链表长度获取)</p>
-<p>3.并行和并发的区别</p>
-<p>答: 并发是指在一段时间内同时运行多个程序，<br>    并行是指在同一时刻，同时运行多个指令，需要有硬件的支持(多核)</p>
-<p>4.线程的创建方式</p>
-<p>答: 1)实现Runnable接口方法，实现Runnable接口的类传到Thread中<br>        Thread.start() 方法会启动 Runnable()中的run()方法<br>    2)实现Callable接口方法<br>        call()方法，FutureTask启动包装容器<br>    3)继承Thread方法</p>
-<pre><code>4)使用线程池，利用Executor框架来创建线程池
-
-
-Executor框架，内部使用线程池机制，提供一系列工厂方法创建线程池</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">newFixedThreadPool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">newCachedThreadPool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">newSingleThreadPool</span></pre></td></tr></table></figure>
-
-<p>5.索引作用，缺点<br>答: 保证每行数据的唯一性，<br>    索引可以大大加快检索的速度，<br>    减少查询分组和排序的时间，<br>    提高系统的性能</p>
-<pre><code>索引的缺点:
-1.创建和维护索引需要耗费时间，并随着数据量的增大而增大
-2.索引需要占用物理空间
-3.对数据表中的数据进行增删改查的时候，索引也需要动态维护</code></pre><p><a href="https://blog.csdn.net/u013310119/article/details/52527632?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">索引</a></p>
-<p>6.HashMap和HashTable</p>
-<p>答: HashMap是由数组+若干个链表(红黑树)组成<br>    hashmap数组默认大小为16(buckets)<br>    Node&lt;K,V&gt;默认是继承Map.Entry&lt;K,V&gt;<br>    对于内部表中的指定索引（桶），如果node的数目多于8个，那么链表就会被转换成红黑树;<br>    对于内部表中的指定索引（桶），如果node的数目小于6个，那么红黑树就会被转换成链表.</p>
-<pre><code>hashtable是线程安全的，synchronized ,使用Entry&lt;K,V&gt;来实现
-
-应该使用ConcurrentHashMap来支持线程安全</code></pre><p>补充:<br>HashMap利用哈希表实现Map接口<br>key和value都有可能为null<br>HashMap不保证元素顺序，还有可能会对元素重新进行哈希<br>size()&gt;capacity()xloadfactor,将会自动扩容并重新哈希</p>
-<p>HashMap线程不安全？<br>在自动调整大小的机制下，如果一个线程在put时触发了resize，此时另一个线程试着去获取一个对象，就可能会使用旧的索引值，从而找不到Entry对象所在的新桶，甚至可能引发Entry链表成环，导致死循环。</p>
-<p>7.List </p>
-<ul>
-<li>ArrayList ,依据动态数组实现，支持随机访问，默认大小10</li>
-<li>Vector , synchronized 是线程安全的</li>
-<li>LinkedList, 基于双向链表实现，只能顺序访问(栈，队列，双向链表)</li>
-</ul>
-<p>8.进程间通讯方式</p>
-<p>答：<br>注意区分进程同步,进程同步是目的，进程通信是手段</p>
-<p>进程通信:</p>
-<ul>
-<li>1.管道pipe</li>
-<li>2.命名管道FIFO</li>
-<li>3.消息队列，消息队列提供了一种从一个进程向另一个进程发送一个数据块的方法</li>
-<li>4.信号量，用来保证共享存储的线程安全问题</li>
-<li>5.共享存储，两个进程各自拿出一块虚拟地址空间来，然后映射到相同的物理内存中</li>
-<li>6.套接字</li>
-</ul>
-<p>9.如何实现同步</p>
-<p>进程同步:</p>
-<ul>
-<li>1.临界区</li>
-<li>2.同步和互斥(互斥量)</li>
-<li>3.信号量</li>
-</ul>
-<p>10.抽象类和接口区别</p>
-<p>答:<br>抽象类Abstract，抽象类不能被实例化，只能被继承</p>
-<p>接口是抽象类的延伸，java8之后可以拥有默认的方法实现，接口的成员都是public，接口的字段都是static和final</p>
-<p>11.数据库分页查询如何实现</p>
-<p>答:<br>使用LIMIT<br>LIMIT m,n 两个参数，<br>第一个参数m,指定返回的第一行在所有数据中的位置，从0开始（注意不是1）<br>第二个参数n,指定最多返回行数</p>
-<p>12.group by怎么过滤数据</p>
-<p>答:<br>主要是创建分组，把具有相同的数据值的行放在同一组中<br>where过滤行，having过滤分组，</p>
-<p>13.数据库的隔离级别</p>
-<p>答:</p>
-<ul>
-<li>未提交读</li>
-<li>提交读</li>
-<li>可重复读</li>
-<li>可串行化</li>
-</ul>
-<p>14.数据库的优化</p>
-<p>答:</p>
-<p>选取最适用的字段属性</p>
-<p>使用连接join来代替子查询</p>
-<p>使用联合union来代替手动创建的临时表</p>
-<p>使用索引</p>
-<p>数据表结构优化</p>
-<p>15.垃圾回收</p>
-<p>答:</p>
-<p><a href=""></a></p>
-<p>16.</p>
-
+        <p>create a hexo hello world</p>
+        
       
 
       
@@ -257,98 +179,19 @@ Executor框架，内部使用线程池机制，提供一系列工厂方法创建
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">面经</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/30/hello-world/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/10/%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/05/13/2020%E7%96%AB%E6%83%85%E5%B0%8F%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          2020疫情小记
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/05/03/%E5%95%86%E5%9F%8E%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">商城秒杀项目</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -368,14 +211,12 @@ Executor框架，内部使用线程池机制，提供一系列工厂方法创建
 
 
 
-  
-  
-  
 
   
-
   
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    </nav>
   
 
 
@@ -402,8 +243,8 @@ Executor框架，内部使用线程池机制，提供一系列工厂方法创建
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
