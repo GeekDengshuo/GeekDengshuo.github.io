@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Deng&#39;s Blog</title>
+  <title>指针、数组、指针数组、数组指针、指针函数、函数指针 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术、生活博客">
-<meta name="keywords" content="Java,SpringBoot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Deng&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="C语言中指针、数组、指针数组、数组指针、函数指针、指针函数 指针 数组、指针数组、数组指针 函数指针、指针函数">
+<meta name="keywords" content="函数指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指针、数组、指针数组、数组指针、指针函数、函数指针">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;10&#x2F;03&#x2F;%E6%8C%87%E9%92%88%E3%80%81%E6%95%B0%E7%BB%84%E3%80%81%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E3%80%81%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E3%80%81%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E3%80%81%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="技术、生活博客">
+<meta property="og:description" content="C语言中指针、数组、指针数组、数组指针、函数指针、指针函数 指针 数组、指针数组、数组指针 函数指针、指针函数">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-10-02T16:13:23.765Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
@@ -148,16 +149,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-指针、数组、指针数组、数组指针、指针函数、函数指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-指针、数组、指针数组、数组指针、指针函数、函数指针" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/03/%E6%8C%87%E9%92%88%E3%80%81%E6%95%B0%E7%BB%84%E3%80%81%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E3%80%81%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E3%80%81%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E3%80%81%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/">指针、数组、指针数组、数组指针、指针函数、函数指针</a>
+    <h1 class="article-title" itemprop="name">
+      指针、数组、指针数组、数组指针、指针函数、函数指针
     </h1>
   
 
@@ -175,7 +174,59 @@
 <li>数组、指针数组、数组指针</li>
 <li>函数指针、指针函数</li>
 </ul>
-        
+<a id="more"></a>
+
+<h3 id="一文搞懂C语言中指针、数组、指针数组、数组指针、函数指针、指针函数"><a href="#一文搞懂C语言中指针、数组、指针数组、数组指针、函数指针、指针函数" class="headerlink" title="一文搞懂C语言中指针、数组、指针数组、数组指针、函数指针、指针函数"></a>一文搞懂C语言中指针、数组、指针数组、数组指针、函数指针、指针函数</h3><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><p>阅读redis源码，初始化流程-创建并初始化服务器数据结构中(initServer)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置信号处理函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">signal(SIGHUP, SIG_IGN);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">signal(SIGPIPE, SIG_IGN);</span></pre></td></tr></table></figure>
+
+<p>signal函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;signal.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// signal函数原型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (*signal (<span class="keyword">int</span> sign,<span class="keyword">void</span> (*)(<span class="keyword">int</span>)))(<span class="keyword">int</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// second version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="keyword">sig_t</span>)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">sig_t</span> signal(<span class="keyword">int</span> sign,<span class="keyword">sig_t</span> func);</span></pre></td></tr></table></figure>
+
+<p>singal函数看着有一点绕，先把基本概念搞清楚，就会发现函数结构很清晰</p>
+<p>先了解一下基本概念</p>
+<h3 id="2-指针-amp-数组"><a href="#2-指针-amp-数组" class="headerlink" title="2.指针 &amp; 数组"></a>2.指针 &amp; 数组</h3><p><strong>指针</strong>: 存放某个变量的地址的<font color = green>变量</font></p>
+<p><strong>数组</strong>: 在内存中分配的连续的”内存块”</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> * <span class="comment">// 通用类型指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&amp;      <span class="comment">// 取地址符号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">*      <span class="comment">// 间接或解引用</span></span></pre></td></tr></table></figure>
+
+<p>在c语言中指针和数组存在千丝万缕的关系，数组中的下标操作都可以使用指针实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *pa;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">pa = &amp;a[<span class="number">0</span>];            <span class="comment">// pa指针，指向数组的首地址</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//pa = a;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//a[i],*(a+i),*(pa+i)  都是相同的表示</span></span></pre></td></tr></table></figure>
+
+<p>数组+下标 = 指针 + 偏移</p>
+<p>当一个数组名被传递给函数时，实际传递的是起始元素的位置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数定义的形参 , 使用指针和数组是相同的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">char</span>[] temp)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">char</span> *temp)</span></span>;</span></pre></td></tr></table></figure>
+
+<h3 id="3-指针数组-amp-数组指针"><a href="#3-指针数组-amp-数组指针" class="headerlink" title="3.指针数组 &amp; 数组指针"></a>3.指针数组 &amp; 数组指针</h3><p>指针是存放某个变量地址的变量 —-&gt; 指针也是变量，指针也可以存放在数组中</p>
+<p><strong>指针数组</strong>：指向指针的指针</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLINES 100</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *linePtr[MAXLINES];   <span class="comment">// 指针数组，存放了100个 char* 指针的数组</span></span></pre></td></tr></table></figure>
+
+<p><strong>数组指针</strong>：指针存放着一个数组的首地址</p>
+<h3 id="4-指针函数-amp-函数指针"><a href="#4-指针函数-amp-函数指针" class="headerlink" title="4.指针函数 &amp; 函数指针"></a>4.指针函数 &amp; 函数指针</h3><p><strong>指针函数</strong>：某个函数的返回值是某一个类型的指针，本质上是一个函数</p>
+<p>类型说明符 + * + 函数名+ (参数)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">func</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>;</span></pre></td></tr></table></figure>
+
+<p><strong>函数指针</strong>: 指向函数的指针变量，本质上是一个指针</p>
+<p>类型说明符 + (* 函数名)+ (参数)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*func) (<span class="keyword">int</span> a,<span class="keyword">int</span> b);</span></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-再探signal函数"><a href="#5-再探signal函数" class="headerlink" title="5.再探signal函数"></a>5.再探signal函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (*signal (<span class="keyword">int</span> sign,<span class="keyword">void</span> (*)(<span class="keyword">int</span>)))(<span class="keyword">int</span>);</span></pre></td></tr></table></figure>
+
+<p>先拆分</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>(*)(<span class="keyword">int</span>);</span></pre></td></tr></table></figure>
+
+<p>函数指针的使用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;   <span class="comment">// 函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  a = <span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (*pfunc)(<span class="keyword">int</span>); <span class="comment">// 函数指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// pfunc 函数指针 = 它指向的函数就是一个具有void返回值，int参数的函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">pfunc = func;      <span class="comment">// pfunc = &amp;func;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指针调用函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">pfunc(<span class="number">5</span>);          <span class="comment">// (*func)(5)</span></span></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 强制类型转换</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">pfunc = (<span class="keyword">void</span> (*)(<span class="keyword">int</span>)) <span class="number">0x0002</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIG_DFL         (void (*)(int))0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIG_IGN         (void (*)(int))1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIG_HOLD        (void (*)(int))5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIG_ERR         ((void (*)(int))-1)</span></span></pre></td></tr></table></figure>
+
+<p>返回函数指针的函数声明</p>
+<ul>
+<li>定义一个函数func，返回值为函数指针；函数有两个输入参数，一个为int，一个是函数指针。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型定义typedef</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(*PFUNC)</span><span class="params">(<span class="keyword">int</span>)</span></span>;   <span class="comment">// 定义PFUNC为一个  void(*)(int)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">PFUNC <span class="title">func</span><span class="params">(<span class="keyword">int</span>,PFUNC)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用typedef进行定义</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">func(<span class="keyword">int</span> ,<span class="keyword">void</span>(*)(<span class="keyword">int</span>))       <span class="comment">// void (*pfunc)(int); // 函数指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>(* func(<span class="keyword">int</span>,<span class="keyword">void</span>(*)(<span class="keyword">int</span>)))(<span class="keyword">int</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// void (*signal (int sign,void (*)(int)))(int);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个返回函数指针的的函数声名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">signal(SIGHUP, SIG_IGN);   <span class="comment">// #define SIGHUP  1       /* hangup */ ; #define SIG_IGN   (void (*)(int))1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">signal(SIGPIPE, SIG_IGN);</span></pre></td></tr></table></figure>
+
+
       
 
       
@@ -197,16 +248,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/03/%E6%8C%87%E9%92%88%E3%80%81%E6%95%B0%E7%BB%84%E3%80%81%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E3%80%81%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E3%80%81%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E3%80%81%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/10/03/%E6%8C%87%E9%92%88%E3%80%81%E6%95%B0%E7%BB%84%E3%80%81%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E3%80%81%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E3%80%81%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E3%80%81%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/25/MySQL%E7%B4%A2%E5%BC%95%E3%80%81%E9%94%81%E5%8F%8A%E4%BC%98%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL索引、锁及优化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -226,697 +336,14 @@
 
 
 
-
-  
-    <article id="post-MySQL索引、锁及优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/25/MySQL%E7%B4%A2%E5%BC%95%E3%80%81%E9%94%81%E5%8F%8A%E4%BC%98%E5%8C%96/">MySQL索引、锁及优化</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/25/MySQL%E7%B4%A2%E5%BC%95%E3%80%81%E9%94%81%E5%8F%8A%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2021-07-25T06:42:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MySQL索引、锁和优化"><a href="#MySQL索引、锁和优化" class="headerlink" title="MySQL索引、锁和优化"></a>MySQL索引、锁和优化</h2><ul>
-<li>索引</li>
-<li>锁</li>
-<li>优化</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/25/MySQL%E7%B4%A2%E5%BC%95%E3%80%81%E9%94%81%E5%8F%8A%E4%BC%98%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Redis非阻塞IO复用模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/27/Redis%E9%9D%9E%E9%98%BB%E5%A1%9EIO%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B/">Redis非阻塞IO复用模型</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/27/Redis%E9%9D%9E%E9%98%BB%E5%A1%9EIO%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-06-27T08:33:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Redis线程模型(非阻塞IO复用模型)</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/27/Redis%E9%9D%9E%E9%98%BB%E5%A1%9EIO%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ThreadLocal本地线程变量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/20/ThreadLocal%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F/">ThreadLocal本地线程变量</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/20/ThreadLocal%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F/" class="archive-article-date">
-  	<time datetime="2021-06-20T09:31:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>多线程环境下本地线程变量解决方案: <strong>ThreadLocal</strong></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/20/ThreadLocal%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-浮点数-缓存-布隆过滤器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/12/%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%BC%93%E5%AD%98-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">浮点数+ 缓存+布隆过滤器</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/12/%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%BC%93%E5%AD%98-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2021-06-12T02:34:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>计算机是如何表示存储浮点数的？</p>
-<p>缓存的优点及缓存引入问题的解决方案?</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/12/%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%BC%93%E5%AD%98-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Reactor模式及NIO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/26/Reactor%E6%A8%A1%E5%BC%8F%E5%8F%8ANIO/">Reactor模式及NIO</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/26/Reactor%E6%A8%A1%E5%BC%8F%E5%8F%8ANIO/" class="archive-article-date">
-  	<time datetime="2021-05-26T13:19:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>事件 - Reactor模式</p>
-<p>NIO - Reactor模式应用</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">Reactor</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/26/Reactor%E6%A8%A1%E5%BC%8F%E5%8F%8ANIO/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SpringMVC基础知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/12/SpringMVC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">SpringMVC基础知识</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/12/SpringMVC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2021-05-12T14:09:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SpringMVC是基于Web MVC设计模式的请求驱动类型的轻量级Web框架；</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">SpringMVC在Web应用中充当控制层Controller的角色</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">MVC模式:(Model-View-Controller):为了解决页面代码和后台代码的分离</span></pre></td></tr></table></figure>
-
-
-<ul>
-<li>0x01.SpringMVC请求流程</li>
-<li>0x02.SpringMVC组件</li>
-<li>0x03.SpringMVC核心</li>
-<li>0x04.SpringMVC启动</li>
-<li>0x05.SpringMVC方法</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">SpringMVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/12/SpringMVC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java对象内存布局" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/05/Java%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">Java对象内存布局</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/05/Java%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" class="archive-article-date">
-  	<time datetime="2021-05-05T07:58:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Java对象内存布局"><a href="#Java对象内存布局" class="headerlink" title="Java对象内存布局"></a>Java对象内存布局</h2><ul>
-<li><p>引子</p>
-</li>
-<li><p>运行时数据区域</p>
-</li>
-<li><p>虚拟机对象</p>
-</li>
-<li><p>锁升级(Synchronized)</p>
-</li>
-</ul>
-<h3 id="1-引子"><a href="#1-引子" class="headerlink" title="1.引子"></a>1.引子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Java与C++之间隔着一堵由内存分配和垃圾回收筑城围墙，墙外面的人想进去，墙里面的人想出来。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">正是因为Java虚拟机的内存分配和垃圾回收机制，减轻了程序员在编码时内存分配的负担，可以把更多精力放在实现上。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">任何事物都有利弊，享受Java虚拟机的便利，就要承担相应的风险。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">当Java程序内存出现泄漏的时候,如果没有搞懂虚拟机的内存分配及对象内存布局，就像隔靴搔痒，很难排查问题。</span></pre></td></tr></table></figure>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">Java;JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/05/Java%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Spring-AOP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/17/Spring-AOP/">Spring-AOP</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/17/Spring-AOP/" class="archive-article-date">
-  	<time datetime="2021-04-17T02:43:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>AOP: Aspect Oriented Programm 面向切面编程</p>
-<p>Spring框架</p>
-<ul>
-<li>IOC</li>
-<li>AOP</li>
-<li>轻量级服务抽象</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/17/Spring-AOP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-graph" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/graph/">graph</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/23/graph/" class="archive-article-date">
-  	<time datetime="2021-01-23T09:46:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/23/graph/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -943,8 +370,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
