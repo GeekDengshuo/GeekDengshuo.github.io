@@ -26,7 +26,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;git&#x2F;640-9.jpeg">
 <meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;git&#x2F;640-10.jpeg">
 <meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;git&#x2F;Screen%20Shot%202021-01-16%20at%205.20.06%20PM.png">
-<meta property="og:updated_time" content="2021-02-09T02:08:45.927Z">
+<meta property="og:updated_time" content="2021-10-17T02:07:17.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;git&#x2F;Screen%20Shot%202021-01-16%20at%2011.24.59%20AM.png">
   
@@ -252,6 +252,14 @@
 <p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/git/640-8.jpeg" alt="recursive"></p>
 <p>先从祖先开始三路合并:<br><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/git/640-9.jpeg" alt="recursive2"></p>
 <p>临时结点继续三路合并:<br><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/git/640-10.jpeg" alt="recursive3"></p>
+<h3 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h3><p>A Straight Line of Commits</p>
+<ul>
+<li>Notice:</li>
+</ul>
+<p>1.Do NOT use Rebase on commits that you’re already pushed/shared on a remote repository!<br>2.Instead,use it for cleaning up your local commit history before merging it into a shared team branch</p>
+<p>最佳用法: 合并自己分支的冗余提交命令，在合并到团队分支上去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git rebase -i  [startpoint]  [endpoint]</span></pre></td></tr></table></figure>
+<p>pick：保留该commit（缩写:p）<br>reword：保留该commit，但我需要修改该commit的注释（缩写:r）<br>edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）<br>squash：将该commit和前一个commit合并（缩写:s）<br>fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）<br>exec：执行shell命令（缩写:x）<br>drop：我要丢弃该commit（缩写:d）</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>git的知识复杂且庞大,需要系统的学习。让我们再回顾”主管的问题”,是不是都已经忘记了!!!</p>
 <p>‘不对，你上述的知识点中根本就没有 git pull 和 git fetch 的知识点’,’哈哈，被发现了’。</p>
 <ul>
@@ -487,15 +495,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">redis;socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">C基础</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">平衡树;随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Java;</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,15 +523,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">C基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,10 +547,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Spring;基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">SpringMVC</a>
               </li>
              
@@ -555,7 +559,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">平衡树;随笔</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">RE; Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Java;</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,7 +571,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">设计模式;工厂模式</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Spring;基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +583,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">算法;位排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">JVM,虚拟机</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,19 +591,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">JVM,虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">设计模式;工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">数据库;MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">金融</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,7 +611,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">金融</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">算法;位排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">算法;递归算法</a>
               </li>
             
             <div class="clearfix"></div>

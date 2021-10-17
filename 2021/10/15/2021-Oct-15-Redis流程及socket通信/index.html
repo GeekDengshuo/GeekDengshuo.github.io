@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 函数指针 | Deng&#39;s Blog</title>
+  <title>2021/Oct/15 Redis流程及socket通信 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术、生活博客">
-<meta name="keywords" content="Java,SpringBoot">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Deng&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88&#x2F;index.html">
+  <meta name="description" content="Redis运行流程梳理 socket网络编程">
+<meta name="keywords" content="redis;socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021&#x2F;Oct&#x2F;15 Redis流程及socket通信">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;10&#x2F;15&#x2F;2021-Oct-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8Asocket%E9%80%9A%E4%BF%A1&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="技术、生活博客">
+<meta property="og:description" content="Redis运行流程梳理 socket网络编程">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket&#x2F;redis%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket&#x2F;redis-cli.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket&#x2F;socket%20endpoint.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket&#x2F;socket%20interface.png">
+<meta property="og:updated_time" content="2021-10-17T02:07:16.132Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;dengshuoimg.oss-cn-beijing.aliyuncs.com&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87&#x2F;2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket&#x2F;redis%E6%B5%81%E7%A8%8B.png">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
   
@@ -148,60 +154,209 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2021-Oct-15-Redis流程及socket通信" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/03/%E6%8C%87%E9%92%88%E3%80%81%E6%95%B0%E7%BB%84%E3%80%81%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E3%80%81%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E3%80%81%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E3%80%81%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="archive-article-date">
-  	<time datetime="2021-10-02T16:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/03/%E6%8C%87%E9%92%88%E3%80%81%E6%95%B0%E7%BB%84%E3%80%81%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E3%80%81%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E3%80%81%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E3%80%81%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/">指针、数组、指针数组、数组指针、指针函数、函数指针</a>
+    <h1 class="article-title" itemprop="name">
+      2021/Oct/15 Redis流程及socket通信
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/10/15/2021-Oct-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8Asocket%E9%80%9A%E4%BF%A1/" class="archive-article-date">
+  	<time datetime="2021-10-15T15:02:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis运行流程梳理</p>
+<p>socket网络编程</p>
+<a id="more"></a>
+
+<h3 id="1-Redis运行流程"><a href="#1-Redis运行流程" class="headerlink" title="1.Redis运行流程"></a>1.Redis运行流程</h3><h4 id="1-1-redis服务端流程"><a href="#1-1-redis服务端流程" class="headerlink" title="1.1 redis服务端流程"></a>1.1 redis服务端流程</h4><ul>
+<li>初始化阶段</li>
+<li>执行事件循环</li>
+</ul>
+<p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket/redis%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<ul>
+<li>acceptTcpHandler/acceptUnixHandler</li>
+</ul>
+<p>事件回调都会创建一个客户端并读取指令</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * 读取客户端的查询缓冲区内容</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readQueryFromClient</span><span class="params">(aeEventLoop *el, <span class="keyword">int</span> fd, <span class="keyword">void</span> *privdata, <span class="keyword">int</span> mask)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    redisClient *c = (redisClient*) privdata;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> nread, readlen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">size_t</span> qblen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 设置服务器的当前客户端</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    server.current_client = c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 读入长度（默认为 16 MB）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    readlen = REDIS_IOBUF_LEN;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 获取查询缓冲区当前内容的长度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 如果读取出现 short read ，那么可能会有内容滞留在读取缓冲区里面</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 这些滞留内容也许不能完整构成一个符合协议的命令，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    qblen = sdslen(c-&gt;querybuf);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 如果有需要，更新缓冲区内容长度的峰值（peak）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (c-&gt;querybuf_peak &lt; qblen) c-&gt;querybuf_peak = qblen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 为查询缓冲区分配空间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    c-&gt;querybuf = sdsMakeRoomFor(c-&gt;querybuf, readlen);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 读入内容到查询缓存</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    nread = <span class="built_in">read</span>(fd, c-&gt;querybuf+qblen, readlen);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (nread) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 根据内容，更新查询缓冲区（SDS） free 和 len 属性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 并将 '\0' 正确地放到内容的最后</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        sdsIncrLen(c-&gt;querybuf,nread);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 记录服务器和客户端最后一次互动的时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        c-&gt;lastinteraction = server.unixtime;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 如果客户端是 master 的话，更新它的复制偏移量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (c-&gt;flags &amp; REDIS_MASTER) c-&gt;reploff += nread;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 在 nread == -1 且 errno == EAGAIN 时运行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        server.current_client = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 查询缓冲区长度超出服务器最大缓冲区长度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 清空缓冲区并释放客户端</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (sdslen(c-&gt;querybuf) &gt; server.client_max_querybuf_len) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        sds ci = catClientInfoString(sdsempty(),c), bytes = sdsempty();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        bytes = sdscatrepr(bytes,c-&gt;querybuf,<span class="number">64</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        redisLog(REDIS_WARNING,<span class="string">"Closing client that reached max query buffer length: %s (qbuf initial bytes: %s)"</span>, ci, bytes);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        sdsfree(ci);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        sdsfree(bytes);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        freeClient(c);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 从查询缓存重读取内容，创建参数，并执行命令</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 函数会执行到缓存中的所有内容都被处理完为止</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    processInputBuffer(c);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    server.current_client = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理客户端输入的命令内容</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInputBuffer</span><span class="params">(redisClient *c)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/* Keep processing while there is something in the input buffer */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 尽可能地处理查询缓冲区中的内容</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 如果读取出现 short read ，那么可能会有内容滞留在读取缓冲区里面</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 这些滞留内容也许不能完整构成一个符合协议的命令，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 需要等待下次读事件的就绪</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(sdslen(c-&gt;querybuf)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* Return if clients are paused. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 如果客户端正处于暂停状态，那么直接返回</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (!(c-&gt;flags &amp; REDIS_SLAVE) &amp;&amp; clientsArePaused()) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* Immediately abort if the client is in the middle of something. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// REDIS_BLOCKED 状态表示客户端正在被阻塞</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (c-&gt;flags &amp; REDIS_BLOCKED) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* REDIS_CLOSE_AFTER_REPLY closes the connection once the reply is</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment">         * written to the client. Make sure to not let the reply grow after</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment">         * this flag has been set (i.e. don't process more commands). */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 客户端已经设置了关闭 FLAG ，没有必要处理命令了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (c-&gt;flags &amp; REDIS_CLOSE_AFTER_REPLY) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* Determine request type when unknown. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 判断请求的类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 两种类型的区别可以在 Redis 的通讯协议上查到：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// http://redis.readthedocs.org/en/latest/topic/protocol.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 简单来说，多条查询是一般客户端发送来的，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 而内联查询则是 TELNET 发送来的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (!c-&gt;reqtype) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (c-&gt;querybuf[<span class="number">0</span>] == <span class="string">'*'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">// 多条查询</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                c-&gt;reqtype = REDIS_REQ_MULTIBULK;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">// 内联查询</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">                c-&gt;reqtype = REDIS_REQ_INLINE;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 将缓冲区中的内容转换成命令，以及命令参数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (c-&gt;reqtype == REDIS_REQ_INLINE) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (processInlineBuffer(c) != REDIS_OK) <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c-&gt;reqtype == REDIS_REQ_MULTIBULK) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (processMultibulkBuffer(c) != REDIS_OK) <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">            redisPanic(<span class="string">"Unknown request type"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* Multibulk processing could see a &lt;= 0 length. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (c-&gt;argc == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">            resetClient(c);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">/* Only reset the client when the command was executed. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 执行命令，并重置客户端</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (processCommand(c) == REDIS_OK)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">                resetClient(c);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-客户端流程"><a href="#1-2-客户端流程" class="headerlink" title="1.2 客户端流程"></a>1.2 客户端流程</h4><p><img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket/redis-cli.png" alt=""></p>
+<h3 id="2-Socket编程"><a href="#2-Socket编程" class="headerlink" title="2.Socket编程"></a>2.Socket编程</h3><p>网络IPC:Socket 套接字</p>
+<p>socket是网络编程<font color = green>通信端点的抽象</font>   </p>
+<img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket/socket%20endpoint.png" style="zoom:50%;" />
+
+<p>套接字接口(socket interface)是一组函数，用来创建网络应用</p>
+<img src="https://dengshuoimg.oss-cn-beijing.aliyuncs.com/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/2021-10-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8ASocket/socket%20interface.png" style="zoom:50%;" />
+
+<ul>
+<li>字节序:</li>
+</ul>
+<p>网络字节序,TCP/IP协议使用大端字节序列</p>
+<p>处理器字节序,Linux、Mac os x、FreeBSD 使用小端字节序</p>
+<ul>
+<li>地址格式</li>
+</ul>
+<p>通用地址格式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">sa_family_t</span> sa_family;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">char</span>        sa_data[];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>因特网地址格式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">sa_family_t</span>   sin_family;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">in_port_t</span>     sin_port;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span>  <span class="title">sin_addr</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>因特网地址 sockaddr_in 需要被强制转换成 struct sockaddr 结构输入到套接字例程中</p>
+<ul>
+<li>getaddrinfo/getnameinfo</li>
+</ul>
+<p>实现二进制套接字地址结构和主机名、主机地址、服务名和端口号的字符串表示之间的转化</p>
+<p>getaddrinfo: 将主机名、主机地址、服务名和端口号的字符串表示转化为套接字地址结构</p>
+<ul>
+<li>socket</li>
+</ul>
+<p>套接字成为连接的一个端点</p>
+<ul>
+<li>connect</li>
+</ul>
+<p>客户端调用connect函数来建立和服务器的连接</p>
+<p>阻塞函数</p>
+<ul>
+<li>bind/listen/accpet</li>
+</ul>
+<p>服务器和客户端建立连接</p>
+<p>bind: 将addr中的服务器套接字地址和套接字描述符sockfd联系起来</p>
+<p>listen: 默认情况下，内核会认为socket函数创建的描述符对应于<font color = red>主动套接字</font>,使用listen函数告诉内核，描述符是被服务器使用的</p>
+<p>listen函数会将sockfd从一个主动套接字转化为<font color = green>监听套接字</font></p>
+<p>accept: 服务器调用accept函数来等待客户端的连接请求</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">函数指针</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">redis;socket</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/10/15/2021-Oct-15-Redis%E6%B5%81%E7%A8%8B%E5%8F%8Asocket%E9%80%9A%E4%BF%A1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/10/03/2021-Oct-3-Git%E6%97%A0%E6%B3%95%E6%8E%A8%E9%80%81%E8%BF%9C%E7%AB%AF%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021/Oct/3 Git无法推送远端问题及解决方案</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -228,9 +383,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
