@@ -6,17 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Redis基础学习 | Deng&#39;s Blog</title>
+  <title>Archives: 2022/2 | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="REmote DIctionary Server 远程字典服务器 典型的NoSQL内存键值数据库 主要内容: 数据库的发展及NoSQL Redis的基本操作">
-<meta name="keywords" content="Redis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Redis基础学习">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;20&#x2F;Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0&#x2F;index.html">
+  <meta name="description" content="技术、生活博客">
+<meta name="keywords" content="Java,SpringBoot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deng&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2022&#x2F;02&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="REmote DIctionary Server 远程字典服务器 典型的NoSQL内存键值数据库 主要内容: 数据库的发展及NoSQL Redis的基本操作">
+<meta property="og:description" content="技术、生活博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-05-29T02:33:16.116Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
@@ -149,386 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Redis基础学习" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Redis基础学习
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2022/02/27/202202-linux/" class="archive-article-date">
+  	<time datetime="2022-02-27T13:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/02/27/202202-linux/">202202-linux</a>
     </h1>
   
 
-        
-        <a href="/2019/12/20/Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2019-12-20T09:47:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>REmote DIctionary Server 远程字典服务器</p>
-<p>典型的NoSQL内存键值数据库</p>
-<p>主要内容:</p>
-<p>数据库的发展及NoSQL</p>
-<p>Redis的基本操作</p>
-<a id="more"></a>
-
-<h3 id="1-数据库的发展"><a href="#1-数据库的发展" class="headerlink" title="1.数据库的发展"></a>1.数据库的发展</h3><ul>
-<li>1.单机的MySQL</li>
-<li>2.Memcached+MySQL+垂直拆分</li>
-<li>3.MySQL主从读写分离</li>
-<li>4.分表分库+水平切分+MySQL集群(cluster)</li>
-<li>5.到达MySQL的拓展瓶颈 发展出NoSQL</li>
-</ul>
-<p><strong>大数据时代</strong></p>
-<p>3v</p>
-<ul>
-<li>海量 Volume</li>
-<li>多样 Varitey</li>
-<li>实时 Velocity</li>
-</ul>
-<p>3高</p>
-<ul>
-<li>高并发</li>
-<li>高可扩</li>
-<li>高性能(单点备份，容灾备份)</li>
-</ul>
-<h4 id="1-1NoSQL"><a href="#1-1NoSQL" class="headerlink" title="1.1NoSQL"></a>1.1NoSQL</h4><p>not only SQL</p>
-<ul>
-<li>非关系型数据库</li>
-<li>无需固定模式，无需多余操作就可以横向拓展</li>
-<li>高读写性能(高可用性，高伸缩性)</li>
-<li>存储自定义数据格式</li>
-<li>最终一致性</li>
-</ul>
-<p>RDBMS型数据库，事务满足ACID属性</p>
-<ul>
-<li>Atomicity 原子性</li>
-<li>Consistency 一致性</li>
-<li>Isolation 隔离性</li>
-<li>Durability 持久性</li>
-</ul>
-<p>对于非关系性数据库<br>对应的是CAP</p>
-<ul>
-<li>Consistency 强一致性</li>
-<li>Availabilty 可用性</li>
-<li>Partition Tolerance 分区容错性</li>
-</ul>
-<p><strong>CAP属于3选2,最多只能满足2个</strong></p>
-<ul>
-<li>AP,大多数网络架构(必须保证可用性，一致性可以做出让步)</li>
-<li>CP,Redis,MongoDB</li>
-<li>CA,传统的数据库(MySQL,Oracle)</li>
-</ul>
-<p>AP 就是让系统放松某一刻数据一致性要求，来换取系统整体的伸缩性和性能改观</p>
-<h4 id="1-2分布式与集群"><a href="#1-2分布式与集群" class="headerlink" title="1.2分布式与集群"></a>1.2分布式与集群</h4><p><strong>分布式:</strong></p>
-<p>不同的多台服务器上部署<strong>不同的服务模块</strong>,之间通过RPC/RMI通信和调用，对外提供服务和组内协作</p>
-<p><strong>集群:</strong></p>
-<p>不同的多台服务器部署<strong>相同的模块</strong>通过分布调度软件进行统一调度</p>
-<p><strong>Redis</strong></p>
-<p>高性能Key/Value分布式内存系统</p>
-<ul>
-<li>1.key-value,常见的value:list,set,zset,string,hash</li>
-<li>2.Persistance 持久化</li>
-<li>3.Redis支持数据备份,Master-Slave模式的数据备份</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ps -ef|grep redis</span></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-Redis"><a href="#2-Redis" class="headerlink" title="2.Redis"></a>2.Redis</h3><ul>
-<li>单进程，读写事件响应是对Epoll函数的包装</li>
-<li>默认是16个库,使用Select num 进行直接切换</li>
-<li>端口是6379</li>
-</ul>
-<h4 id="2-1Redis数据库的操作"><a href="#2-1Redis数据库的操作" class="headerlink" title="2.1Redis数据库的操作"></a>2.1Redis数据库的操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">dbsize        &#x2F;&#x2F; 当前数据库key的数量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">select        &#x2F;&#x2F; 命令切换库  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">FLUSHDB       &#x2F;&#x2F; 当前库清理key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">FLUSHALL      &#x2F;&#x2F; 全部库的key清理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;********Key的操作************&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">keys *        &#x2F;&#x2F; 查看全部的key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">exists key    &#x2F;&#x2F; 判断键是否存在</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">move key db   &#x2F;&#x2F; 移动道目的库，当前库的key-value值都被移动</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">expire key    &#x2F;&#x2F; 为给定的key设置过期时间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">ttl   key     &#x2F;&#x2F; 查看还剩多少时间过期  -1 表示永不过期，-2 表示已过期</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">type key      &#x2F;&#x2F; 查看键的类型(下面的五大数据类型)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">OBJECT ENCODING key &#x2F;&#x2F; 查看对象的编码方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#x2F;**********  通用指令 *******&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">DEL  EXPIRE RENAME TYPE OBJECT</span></pre></td></tr></table></figure>
-
-<h4 id="2-2Redis的数据类型"><a href="#2-2Redis的数据类型" class="headerlink" title="2.2Redis的数据类型"></a>2.2Redis的数据类型</h4><table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>存储的值</th>
-<th>基本操作</th>
-<th>编码类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>REDIS_STRING 字符串对象</td>
-<td>字符串、整数或者浮点数</td>
-<td>对整个字符串或者字符串的其中一部分执行操作 对整数和浮点数执行自增或者自减操作</td>
-<td>REDIS_ENCODING_INT、REDIS_ENCODING_EMBSTR、REDIS_ENCODING_RAW</td>
-</tr>
-<tr>
-<td>REDIS_LIST   列表对象</td>
-<td>列表</td>
-<td>从两端压入或者弹出元素 对单个或者多个元素进行修剪，只保留一个范围内的元素</td>
-<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_LINKEDLIST</td>
-</tr>
-<tr>
-<td>REDIS_SET   集合对象</td>
-<td>无序集合</td>
-<td>添加、获取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合里面随机获取元素</td>
-<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_HT</td>
-</tr>
-<tr>
-<td>REDIS_HASH    哈希对象</td>
-<td>包含键值对的无序散列表</td>
-<td>添加、获取、移除单个键值对 获取所有键值对 检查某个键是否存在</td>
-<td>REDIS_ENCODING_INTSET、REDIS_ENCODING_HT</td>
-</tr>
-<tr>
-<td>REDIS_ZSET    有序集合对象</td>
-<td>有序集合</td>
-<td>添加、获取、删除元素 根据分值范围或者成员来获取元素 计算一个键的排名</td>
-<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_SKIPLIST</td>
-</tr>
-</tbody></table>
-<p>其中<strong>HASH</strong>是最主要，也是应用最多的的数据类型结构</p>
-<p><strong>STRING</strong><br>字符串，单值单value</p>
-<ul>
-<li>set/get/del/append/strlen</li>
-<li>incr/decr/incrby/decrby    自增/自减/加减跟上参数值 by</li>
-<li>getrange/setrange          获取范围值/设定指定范围值</li>
-<li>setex(set with expire)     设定键的秒值/ setnx(set if not exits)  防止覆盖，只要不存在就覆盖</li>
-<li>mset/mget/msetnx           多值设定/多值获取/多值创建(必须所有值都不存在，才能创建成功)</li>
-</ul>
-<p>一些基本操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ping</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">PONG</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set k1 v1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set k2 v2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set k3 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; keys *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">1) &quot;k2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">2) &quot;k3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">3) &quot;k1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; exists k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; move k3 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; select 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379[2]&gt; keys *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">1) &quot;k3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379[2]&gt; get k3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&quot;v3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ttl k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">(integer) -1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; EXPIRE k2 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&quot;v2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ttl k2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">(integer) -2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">(nil)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; keys *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">1) &quot;k1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">27.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">&quot;v1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; append k1 12345</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">(integer) 7</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">&quot;v112345&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt;  strlen k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">(integer) 7</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">&quot;v112345&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SETRANGE 0 deng</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">(error) ERR wrong number of arguments for &#39;setrange&#39; command</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SETRANGE k1 0 deng</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">(integer) 7</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">&quot;deng345&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">27.0.0.1:6379&gt; mset k1 v1 k2 v2 k3 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mget k1 k2 k3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">1) &quot;v1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">2) &quot;v2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">3) &quot;v3&quot;</span></pre></td></tr></table></figure>
-
-
-<p><strong>LIST</strong></p>
-<p>列表，单值多Value</p>
-<ul>
-<li>lpush/rpush/lrange     左侧push/右侧push/列出元素值</li>
-<li>lpop/rpop           </li>
-<li>lindex/llen            索引下标/长度</li>
-<li>lrem key /ltrim key index1  index2    删除value/ 开始index,结束index截取后重新赋值给key</li>
-<li>rpoplpush  key1 key2   左侧弹出，key2进行右侧压入</li>
-<li>lset key index value   根据下标设定值</li>
-<li>linsert key before/after value   指定位置插入值</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH list01 1 2 3 4 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(integer) 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; type list01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">list</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LRANGE list01 0 -1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">1) &quot;5&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">2) &quot;4&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">3) &quot;3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">4) &quot;2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">5) &quot;1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush list02 1 2 3 4 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">(integer) 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LRANGE list02 0 -1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">1) &quot;1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">2) &quot;2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">3) &quot;3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">4) &quot;4&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">5) &quot;5&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lpop list01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&quot;5&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpop list01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&quot;1&quot;</span></pre></td></tr></table></figure>
-
-
-<p><strong>SET</strong><br>集合，单值多value</p>
-<ul>
-<li>sadd/smembers/sismembers      集合添加/所有成员/是不是成员</li>
-<li>scard                         集合中元素</li>
-<li>srem key value                删除</li>
-<li>srandmember key num           随机抽取几个(num)数</li>
-<li>spop key                      随机出栈</li>
-<li>smove key1 key2</li>
-<li>sdiff/sinter/sunion           集合的差集/交集/并集</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd set01 1 1 2 2 3 3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(integer) 3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; smembers set01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">1) &quot;1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2) &quot;2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">3) &quot;3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; scard set01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">(integer) 3</span></pre></td></tr></table></figure>
-
-<p><strong>HASH</strong><br>哈希，KV模式不变，V相当于一个键值对<br>也是最重要的一个结构</p>
-<ul>
-<li>hset/hget/hmset/hmget/hgetall     </li>
-<li>hlen/hexists key</li>
-<li>hkeys/hvals</li>
-<li>hincrby/hincrbyfloat</li>
-<li>hsetnx</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset user id 12</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hget user id</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&quot;12&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmset customer id 11 name deng age 26</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmget customer id name age</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">1) &quot;11&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">2) &quot;deng&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">3) &quot;26&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HGETALL customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">1) &quot;id&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">2) &quot;11&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">3) &quot;name&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">4) &quot;deng&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">5) &quot;age&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">6) &quot;26&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hdel user id</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hlen customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">(integer) 3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS customer id</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS customer name</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS customer email</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">(integer) 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HKEYS customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">1) &quot;id&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">2) &quot;name&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">3) &quot;age&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HVALS customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">1) &quot;11&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">2) &quot;deng&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">3) &quot;26&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HINCRBY customer age 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">(integer) 28</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt;</span></pre></td></tr></table></figure>
-
-
-<p><strong>ZSET</strong></p>
-<p>sorted set<br>在set的基础上加上score</p>
-<ul>
-<li>zadd/zrange</li>
-<li>zrangebyscore</li>
-<li>zrem</li>
-<li>zcard</li>
-<li>zcount key score</li>
-<li>zrank 下标</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">set k1 v1 v2 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">zset k1 score1 v1 score2 v2 score3 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt; zadd zset-key 728 member1 (integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&gt; zadd zset-key 982 member0 (integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&gt; zadd zset-key 982 member0 (integer) 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&gt; zrange zset-key 0 -1 withscores 1) &quot;member1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">2) &quot;728&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">3) &quot;member0&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">4) &quot;982&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&gt; zrangebyscore zset-key 0 800 withscores 1) &quot;member1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">2) &quot;728&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&gt; zrem zset-key member1 (integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&gt; zrem zset-key member1 (integer) 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&gt; zrange zset-key 0 -1 withscores 1) &quot;member0&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">2) &quot;982&quot;</span></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-3Redis持久化"><a href="#2-3Redis持久化" class="headerlink" title="2.3Redis持久化"></a>2.3Redis持久化</h4><p>redis是内存数据库，数据库状态存储在内存里面，需要将内存的数据持久化保存到磁盘里面。</p>
-<p>redis提供了两种持久化方式</p>
-<ul>
-<li>RDB</li>
-<li>AOF</li>
-</ul>
-<p><strong>RDB(Redis DataBase)</strong></p>
-<p>RDB是一种snapshot快照的方式，将内存中的键值对数据保存到RDB文件(dump.rdb)，恢复是直接将RDB文件读入内存。</p>
-<p><strong>触发RDB文件生成的指令</strong></p>
-<ul>
-<li>SAVE</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 自动触发方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; redis.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;* save &lt;seconds&gt;  &lt;changes&gt; *&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">save  900 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">save  300 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">save  60  10000</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 手动触发方式 save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 手动触发方式 bgsave</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; save</span></pre></td></tr></table></figure>
-
-<ul>
-<li>禁用RDB持久化</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; redis.config</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">save &quot;&quot;</span></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>RDB的优缺点</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">优点:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">1.RDB是一个非常紧凑(compact)的文件，它保存了redis 在某个时间点上的数据集。这种文件非常适合用于进行备份和灾难恢复。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.生成RDB文件的时候，redis主进程会fork()一个子进程来处理所有保存工作，主进程不需要进行任何磁盘IO操作。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">3.RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">缺点:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">1、RDB方式数据没办法做到实时持久化&#x2F;秒级持久化。因为bgsave每次运行都要执行fork操作创建子进程，属于重量级操作，如果不采用压缩算法(内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑)，频繁执行成本过高(影响性能)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">2、RDB文件使用特定二进制格式保存，Redis版本演进过程中有多个格式的RDB版本，存在老版本Redis服务无法兼容新版RDB格式的问题(版本不兼容)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">3、在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改(数据有丢失)</span></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong>AOF(Append Of File)</strong></p>
-<p>通过保存Redis服务器所执行的写指令来记录数据库状态</p>
-<p><strong>AOF实现步骤</strong></p>
-<ul>
-<li>命令追加</li>
-<li>文件写入</li>
-<li>文件同步</li>
-</ul>
-<p><strong>AOF重写</strong></p>
-<p>aof rewrite，不仅仅是对现有的AOF文件进行读取、分析和写入</p>
-<p>而是创新一个新的AOF文件直接读取服务器当前数据库，并将新的AOF文件代替之前的AOF文件</p>
-<p>并利用AOF重写缓冲区解决数据不一致问题</p>
-<p>AOF重写过程中的流程</p>
-<ul>
-<li>1.子进程进行aof文件重写期间，服务进程(父进程)可以继续处理命令请求</li>
-<li>2.父进程执行客户端的命令，将执行后写命令追加到<font color = green>AOF缓冲区</font></li>
-<li>3.将执行后的写命令追加到<font color = green>AOF重写缓冲区</font></li>
-<li>4.从创建子进程开始，服务区执行的写命令都会记录到AOF重写缓冲区里面</li>
-<li>5.子进程执行AOF重写,向父进程发送信号，AOF重写缓冲区的所有内容写入到AOF文件中</li>
-<li>6.原子地(atomic)覆盖现有的AOF文件</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Redis</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">信号;linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/20/Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/12/20/Redis%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis深入学习
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/12/19/Balanced-Tree/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Balanced Tree</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -555,8 +228,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

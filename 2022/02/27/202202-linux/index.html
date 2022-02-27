@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Redis基础学习 | Deng&#39;s Blog</title>
+  <title>202202-linux | Deng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="REmote DIctionary Server 远程字典服务器 典型的NoSQL内存键值数据库 主要内容: 数据库的发展及NoSQL Redis的基本操作">
-<meta name="keywords" content="Redis">
+  <meta name="description" content="1.信号2.redis相关3.线程4.linux基础">
+<meta name="keywords" content="信号;linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis基础学习">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;20&#x2F;Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0&#x2F;index.html">
+<meta property="og:title" content="202202-linux">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2022&#x2F;02&#x2F;27&#x2F;202202-linux&#x2F;index.html">
 <meta property="og:site_name" content="Deng&#39;s Blog">
-<meta property="og:description" content="REmote DIctionary Server 远程字典服务器 典型的NoSQL内存键值数据库 主要内容: 数据库的发展及NoSQL Redis的基本操作">
+<meta property="og:description" content="1.信号2.redis相关3.线程4.linux基础">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-05-29T02:33:16.116Z">
+<meta property="og:updated_time" content="2022-02-27T13:20:45.125Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Deng&#39;s Blog" type="application/atom+xml">
@@ -149,258 +149,269 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Redis基础学习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-202202-linux" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Redis基础学习
+      202202-linux
     </h1>
   
 
         
-        <a href="/2019/12/20/Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2019-12-20T09:47:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-20</time>
+        <a href="/2022/02/27/202202-linux/" class="archive-article-date">
+  	<time datetime="2022-02-27T13:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>REmote DIctionary Server 远程字典服务器</p>
-<p>典型的NoSQL内存键值数据库</p>
-<p>主要内容:</p>
-<p>数据库的发展及NoSQL</p>
-<p>Redis的基本操作</p>
+        <p>1.信号<br>2.redis相关<br>3.线程<br>4.linux基础</p>
 <a id="more"></a>
-
-<h3 id="1-数据库的发展"><a href="#1-数据库的发展" class="headerlink" title="1.数据库的发展"></a>1.数据库的发展</h3><ul>
-<li>1.单机的MySQL</li>
-<li>2.Memcached+MySQL+垂直拆分</li>
-<li>3.MySQL主从读写分离</li>
-<li>4.分表分库+水平切分+MySQL集群(cluster)</li>
-<li>5.到达MySQL的拓展瓶颈 发展出NoSQL</li>
-</ul>
-<p><strong>大数据时代</strong></p>
-<p>3v</p>
-<ul>
-<li>海量 Volume</li>
-<li>多样 Varitey</li>
-<li>实时 Velocity</li>
-</ul>
-<p>3高</p>
-<ul>
-<li>高并发</li>
-<li>高可扩</li>
-<li>高性能(单点备份，容灾备份)</li>
-</ul>
-<h4 id="1-1NoSQL"><a href="#1-1NoSQL" class="headerlink" title="1.1NoSQL"></a>1.1NoSQL</h4><p>not only SQL</p>
-<ul>
-<li>非关系型数据库</li>
-<li>无需固定模式，无需多余操作就可以横向拓展</li>
-<li>高读写性能(高可用性，高伸缩性)</li>
-<li>存储自定义数据格式</li>
-<li>最终一致性</li>
-</ul>
-<p>RDBMS型数据库，事务满足ACID属性</p>
-<ul>
-<li>Atomicity 原子性</li>
-<li>Consistency 一致性</li>
-<li>Isolation 隔离性</li>
-<li>Durability 持久性</li>
-</ul>
-<p>对于非关系性数据库<br>对应的是CAP</p>
-<ul>
-<li>Consistency 强一致性</li>
-<li>Availabilty 可用性</li>
-<li>Partition Tolerance 分区容错性</li>
-</ul>
-<p><strong>CAP属于3选2,最多只能满足2个</strong></p>
-<ul>
-<li>AP,大多数网络架构(必须保证可用性，一致性可以做出让步)</li>
-<li>CP,Redis,MongoDB</li>
-<li>CA,传统的数据库(MySQL,Oracle)</li>
-</ul>
-<p>AP 就是让系统放松某一刻数据一致性要求，来换取系统整体的伸缩性和性能改观</p>
-<h4 id="1-2分布式与集群"><a href="#1-2分布式与集群" class="headerlink" title="1.2分布式与集群"></a>1.2分布式与集群</h4><p><strong>分布式:</strong></p>
-<p>不同的多台服务器上部署<strong>不同的服务模块</strong>,之间通过RPC/RMI通信和调用，对外提供服务和组内协作</p>
-<p><strong>集群:</strong></p>
-<p>不同的多台服务器部署<strong>相同的模块</strong>通过分布调度软件进行统一调度</p>
-<p><strong>Redis</strong></p>
-<p>高性能Key/Value分布式内存系统</p>
-<ul>
-<li>1.key-value,常见的value:list,set,zset,string,hash</li>
-<li>2.Persistance 持久化</li>
-<li>3.Redis支持数据备份,Master-Slave模式的数据备份</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ps -ef|grep redis</span></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-Redis"><a href="#2-Redis" class="headerlink" title="2.Redis"></a>2.Redis</h3><ul>
-<li>单进程，读写事件响应是对Epoll函数的包装</li>
-<li>默认是16个库,使用Select num 进行直接切换</li>
-<li>端口是6379</li>
-</ul>
-<h4 id="2-1Redis数据库的操作"><a href="#2-1Redis数据库的操作" class="headerlink" title="2.1Redis数据库的操作"></a>2.1Redis数据库的操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">dbsize        &#x2F;&#x2F; 当前数据库key的数量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">select        &#x2F;&#x2F; 命令切换库  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">FLUSHDB       &#x2F;&#x2F; 当前库清理key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">FLUSHALL      &#x2F;&#x2F; 全部库的key清理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;********Key的操作************&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">keys *        &#x2F;&#x2F; 查看全部的key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">exists key    &#x2F;&#x2F; 判断键是否存在</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">move key db   &#x2F;&#x2F; 移动道目的库，当前库的key-value值都被移动</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">expire key    &#x2F;&#x2F; 为给定的key设置过期时间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">ttl   key     &#x2F;&#x2F; 查看还剩多少时间过期  -1 表示永不过期，-2 表示已过期</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">type key      &#x2F;&#x2F; 查看键的类型(下面的五大数据类型)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">OBJECT ENCODING key &#x2F;&#x2F; 查看对象的编码方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#x2F;**********  通用指令 *******&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">DEL  EXPIRE RENAME TYPE OBJECT</span></pre></td></tr></table></figure>
-
-<h4 id="2-2Redis的数据类型"><a href="#2-2Redis的数据类型" class="headerlink" title="2.2Redis的数据类型"></a>2.2Redis的数据类型</h4><table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>存储的值</th>
-<th>基本操作</th>
-<th>编码类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>REDIS_STRING 字符串对象</td>
-<td>字符串、整数或者浮点数</td>
-<td>对整个字符串或者字符串的其中一部分执行操作 对整数和浮点数执行自增或者自减操作</td>
-<td>REDIS_ENCODING_INT、REDIS_ENCODING_EMBSTR、REDIS_ENCODING_RAW</td>
-</tr>
-<tr>
-<td>REDIS_LIST   列表对象</td>
-<td>列表</td>
-<td>从两端压入或者弹出元素 对单个或者多个元素进行修剪，只保留一个范围内的元素</td>
-<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_LINKEDLIST</td>
-</tr>
-<tr>
-<td>REDIS_SET   集合对象</td>
-<td>无序集合</td>
-<td>添加、获取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合里面随机获取元素</td>
-<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_HT</td>
-</tr>
-<tr>
-<td>REDIS_HASH    哈希对象</td>
-<td>包含键值对的无序散列表</td>
-<td>添加、获取、移除单个键值对 获取所有键值对 检查某个键是否存在</td>
-<td>REDIS_ENCODING_INTSET、REDIS_ENCODING_HT</td>
-</tr>
-<tr>
-<td>REDIS_ZSET    有序集合对象</td>
-<td>有序集合</td>
-<td>添加、获取、删除元素 根据分值范围或者成员来获取元素 计算一个键的排名</td>
-<td>REDIS_ENCODING_ZIPLIST、REDIS_ENCODING_SKIPLIST</td>
-</tr>
-</tbody></table>
-<p>其中<strong>HASH</strong>是最主要，也是应用最多的的数据类型结构</p>
-<p><strong>STRING</strong><br>字符串，单值单value</p>
-<ul>
-<li>set/get/del/append/strlen</li>
-<li>incr/decr/incrby/decrby    自增/自减/加减跟上参数值 by</li>
-<li>getrange/setrange          获取范围值/设定指定范围值</li>
-<li>setex(set with expire)     设定键的秒值/ setnx(set if not exits)  防止覆盖，只要不存在就覆盖</li>
-<li>mset/mget/msetnx           多值设定/多值获取/多值创建(必须所有值都不存在，才能创建成功)</li>
-</ul>
-<p>一些基本操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ping</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">PONG</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set k1 v1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set k2 v2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set k3 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; keys *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">1) &quot;k2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">2) &quot;k3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">3) &quot;k1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; exists k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; move k3 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; select 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379[2]&gt; keys *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">1) &quot;k3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379[2]&gt; get k3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&quot;v3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ttl k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">(integer) -1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; EXPIRE k2 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&quot;v2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ttl k2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">(integer) -2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">(nil)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; keys *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">1) &quot;k1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">27.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">&quot;v1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; append k1 12345</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">(integer) 7</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">&quot;v112345&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt;  strlen k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">(integer) 7</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">&quot;v112345&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SETRANGE 0 deng</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">(error) ERR wrong number of arguments for &#39;setrange&#39; command</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SETRANGE k1 0 deng</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">(integer) 7</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get k1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">&quot;deng345&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">27.0.0.1:6379&gt; mset k1 v1 k2 v2 k3 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mget k1 k2 k3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">1) &quot;v1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">2) &quot;v2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">3) &quot;v3&quot;</span></pre></td></tr></table></figure>
-
-
-<p><strong>LIST</strong></p>
-<p>列表，单值多Value</p>
-<ul>
-<li>lpush/rpush/lrange     左侧push/右侧push/列出元素值</li>
-<li>lpop/rpop           </li>
-<li>lindex/llen            索引下标/长度</li>
-<li>lrem key /ltrim key index1  index2    删除value/ 开始index,结束index截取后重新赋值给key</li>
-<li>rpoplpush  key1 key2   左侧弹出，key2进行右侧压入</li>
-<li>lset key index value   根据下标设定值</li>
-<li>linsert key before/after value   指定位置插入值</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH list01 1 2 3 4 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(integer) 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; type list01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">list</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LRANGE list01 0 -1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">1) &quot;5&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">2) &quot;4&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">3) &quot;3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">4) &quot;2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">5) &quot;1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush list02 1 2 3 4 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">(integer) 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LRANGE list02 0 -1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">1) &quot;1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">2) &quot;2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">3) &quot;3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">4) &quot;4&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">5) &quot;5&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lpop list01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&quot;5&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpop list01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&quot;1&quot;</span></pre></td></tr></table></figure>
-
-
-<p><strong>SET</strong><br>集合，单值多value</p>
-<ul>
-<li>sadd/smembers/sismembers      集合添加/所有成员/是不是成员</li>
-<li>scard                         集合中元素</li>
-<li>srem key value                删除</li>
-<li>srandmember key num           随机抽取几个(num)数</li>
-<li>spop key                      随机出栈</li>
-<li>smove key1 key2</li>
-<li>sdiff/sinter/sunion           集合的差集/交集/并集</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd set01 1 1 2 2 3 3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(integer) 3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; smembers set01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">1) &quot;1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2) &quot;2&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">3) &quot;3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; scard set01</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">(integer) 3</span></pre></td></tr></table></figure>
-
-<p><strong>HASH</strong><br>哈希，KV模式不变，V相当于一个键值对<br>也是最重要的一个结构</p>
-<ul>
-<li>hset/hget/hmset/hmget/hgetall     </li>
-<li>hlen/hexists key</li>
-<li>hkeys/hvals</li>
-<li>hincrby/hincrbyfloat</li>
-<li>hsetnx</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset user id 12</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hget user id</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&quot;12&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmset customer id 11 name deng age 26</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmget customer id name age</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">1) &quot;11&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">2) &quot;deng&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">3) &quot;26&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HGETALL customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">1) &quot;id&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">2) &quot;11&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">3) &quot;name&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">4) &quot;deng&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">5) &quot;age&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">6) &quot;26&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hdel user id</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hlen customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">(integer) 3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS customer id</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS customer name</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">(integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS customer email</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">(integer) 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HKEYS customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">1) &quot;id&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">2) &quot;name&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">3) &quot;age&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HVALS customer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">1) &quot;11&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">2) &quot;deng&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">3) &quot;26&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HINCRBY customer age 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">(integer) 28</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt;</span></pre></td></tr></table></figure>
-
-
-<p><strong>ZSET</strong></p>
-<p>sorted set<br>在set的基础上加上score</p>
-<ul>
-<li>zadd/zrange</li>
-<li>zrangebyscore</li>
-<li>zrem</li>
-<li>zcard</li>
-<li>zcount key score</li>
-<li>zrank 下标</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">set k1 v1 v2 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">zset k1 score1 v1 score2 v2 score3 v3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt; zadd zset-key 728 member1 (integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&gt; zadd zset-key 982 member0 (integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&gt; zadd zset-key 982 member0 (integer) 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&gt; zrange zset-key 0 -1 withscores 1) &quot;member1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">2) &quot;728&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">3) &quot;member0&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">4) &quot;982&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&gt; zrangebyscore zset-key 0 800 withscores 1) &quot;member1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">2) &quot;728&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&gt; zrem zset-key member1 (integer) 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&gt; zrem zset-key member1 (integer) 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&gt; zrange zset-key 0 -1 withscores 1) &quot;member0&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">2) &quot;982&quot;</span></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-3Redis持久化"><a href="#2-3Redis持久化" class="headerlink" title="2.3Redis持久化"></a>2.3Redis持久化</h4><p>redis是内存数据库，数据库状态存储在内存里面，需要将内存的数据持久化保存到磁盘里面。</p>
-<p>redis提供了两种持久化方式</p>
-<ul>
-<li>RDB</li>
-<li>AOF</li>
-</ul>
-<p><strong>RDB(Redis DataBase)</strong></p>
-<p>RDB是一种snapshot快照的方式，将内存中的键值对数据保存到RDB文件(dump.rdb)，恢复是直接将RDB文件读入内存。</p>
-<p><strong>触发RDB文件生成的指令</strong></p>
-<ul>
-<li>SAVE</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 自动触发方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; redis.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;* save &lt;seconds&gt;  &lt;changes&gt; *&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">save  900 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">save  300 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">save  60  10000</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 手动触发方式 save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 手动触发方式 bgsave</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; save</span></pre></td></tr></table></figure>
+<h4 id="1-信号"><a href="#1-信号" class="headerlink" title="1.信号"></a>1.信号</h4><p>信号是软件中断，提供了一种处理异步事件的方法</p>
+<p>unix信号机制最简单的接口是signal函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * sign  信号整型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * func  函数指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * return ：函数指针(一个函数地址，函数有一个整型参数，无返回值)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (* signal(<span class="keyword">int</span> sign,<span class="keyword">void</span> (*func)(<span class="keyword">int</span>))) (<span class="keyword">int</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 其他的表达方式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">void</span> <span class="title">signfunc</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function">signfunc *<span class="title">signal</span><span class="params">(<span class="keyword">int</span> ,signfunc)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="keyword">sighandler_t</span>)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">sighandler_t</span> signal(<span class="keyword">int</span> signum,<span class="keyword">sighandler_t</span> handler);</span></pre></td></tr></table></figure>
 
 <ul>
-<li>禁用RDB持久化</li>
+<li>信号：更高层的软件形式的异常</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; redis.config</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">save &quot;&quot;</span></pre></td></tr></table></figure>
+<p>知识拓展:</p>
+<p><strong>异常控制流</strong></p>
+<p>现代控制系统通过使控制流发生突变来对情况做出反应，我们把这些突变称为异常控制流ECF</p>
+<p>(Exceptional Control Flow)。</p>
+<ul>
+<li>硬件层，硬件检测到的时间会触发控制突然转移到异常处理程序</li>
+<li>操作系统层，内核通过上下文切换将控制从一个进程转移到另一个进程</li>
+<li>应用层，一个进程可以发送信号到另一个进程，接受者会将控制突然转移到它的一个信号处理程序</li>
+</ul>
+<p>异常(exception)就是控制流的突变</p>
+<p>硬件触发异常，通过异常处理表转移到异常处理程序，剩下的工作就是异常处理程序在软件中完成</p>
+<p>异常的类别：</p>
+<ul>
+<li>中断(interrupt)</li>
+<li>陷阱(trap)</li>
+<li>故障(fault)</li>
+<li>终止（abort）</li>
+</ul>
+<p><strong>中断</strong></p>
+<p>中断是来自io设备的信号，是异步发生的</p>
+<p>I/O设备（网络适配器，磁盘控制器，定时器芯片）通过相处理器芯片的一个引脚发信号，并将信号发到系统总线上，来触发中断，这个异常号标识了引起中断的设备</p>
+<p><strong>陷阱</strong></p>
+<p>陷阱是有意的异常</p>
+<p>陷阱处理程序将控制返回到下一条指令</p>
+<p>可以在用户程序和内核之间提供一个像过程一样的接口（system call）系统调用</p>
+<p><strong>故障</strong></p>
+<p>故障是由错误情况引起的，可能能够被故障处理程序修正</p>
+<p>缺页异常</p>
+<p><strong>终止</strong></p>
+<p>终止时不可恢复的致命错误造成的结果</p>
+<p><strong>并发流</strong></p>
+<p>一个逻辑流的执行在时间上与另一个流重叠，称为并发流(concurrent flow)</p>
+<p>多个流并发地执行的一般现象称为并发(concurrency)</p>
+<p>一个进程和其他进程轮流运行的概念称为多任务(multitasking)</p>
+<p>并行流是并发流的一个真子集，如果两个流并发地运行在不同的处理器内核或者计算机上，那我们称他们为并行流(parallel flow)</p>
+<h4 id="2-strstr-函数"><a href="#2-strstr-函数" class="headerlink" title="2.strstr()函数"></a>2.strstr()函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">strstr</span>(<span class="keyword">const</span> <span class="keyword">char</span> *haystack, <span class="keyword">const</span> <span class="keyword">char</span> *needle);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// locate a subtring in string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//比喻大海捞针</span></span></pre></td></tr></table></figure>
+
+<h4 id="3-Redis-编码格式"><a href="#3-Redis-编码格式" class="headerlink" title="3.Redis 编码格式"></a>3.Redis 编码格式</h4><p><strong>redis外部数据结构</strong></p>
+<p>redis的对象系统</p>
+<ul>
+<li>字符串 string</li>
+<li>集合 set</li>
+<li>有序集合 zset</li>
+<li>哈希 hash</li>
+<li>列表 list</li>
+</ul>
+<p><strong>redis内部实现数据结构</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_RAW 0     <span class="comment">/* Raw representation */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_INT 1     <span class="comment">/* Encoded as integer */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_HT 2      <span class="comment">/* Encoded as hash table */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_ZIPMAP 3  <span class="comment">/* Encoded as zipmap */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_LINKEDLIST 4 <span class="comment">/* Encoded as regular linked list */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_ZIPLIST 5 <span class="comment">/* Encoded as ziplist */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_INTSET 6  <span class="comment">/* Encoded as intset */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_SKIPLIST 7  <span class="comment">/* Encoded as skiplist */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_ENCODING_EMBSTR 8  <span class="comment">/* Embedded sds string encoding */</span></span></span></pre></td></tr></table></figure>
 
 
+
+<p><strong>1.t_string</strong></p>
+<p>REDIS_STRING编码类型</p>
+<ul>
+<li>REDIS_ENCODING_INT ,整数值实现的字符串对象</li>
+<li>REDIS_ENCODING_RAW，简单动态字符串实现的字符串对象</li>
+<li>REDIS_ENCODING_EMBSTR，embstr编码的简单动态字符串实现的字符串对象</li>
+</ul>
+<p>embstr编码的字符串对象所有数据都保存在一块连续的内存中</p>
+<p>object.c中实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">robj *<span class="title">tryObjectEncoding</span><span class="params">(robj *o)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">long</span> value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    sds s = o-&gt;ptr;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">size_t</span> len;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 只在字符串的编码为 RAW 或者 EMBSTR 时尝试进行编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (!sdsEncodedObject(o)) <span class="keyword">return</span> o;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 不对共享对象进行编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (o-&gt;refcount &gt; <span class="number">1</span>) <span class="keyword">return</span> o;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 对字符串进行检查</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 只对长度小于或等于 21 字节，并且可以被解释为整数的字符串进行编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    len = sdslen(s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (len &lt;= <span class="number">21</span> &amp;&amp; string2l(s,len,&amp;value)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* This object is encodable as a long. Try to use a shared object.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">         * Note that we avoid using shared integers when maxmemory is used</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">         * because every object needs to have a private LRU field for the LRU</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">         * algorithm to work well. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (server.maxmemory == <span class="number">0</span> &amp;&amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            value &gt;= <span class="number">0</span> &amp;&amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            value &lt; REDIS_SHARED_INTEGERS)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            decrRefCount(o);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            incrRefCount(shared.integers[value]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> shared.integers[value];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (o-&gt;encoding == REDIS_ENCODING_RAW) sdsfree(o-&gt;ptr);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            o-&gt;encoding = REDIS_ENCODING_INT;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            o-&gt;ptr = (<span class="keyword">void</span>*) value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> o;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 尝试将 RAW 编码的字符串编码为 EMBSTR 编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (len &lt;= REDIS_ENCODING_EMBSTR_SIZE_LIMIT) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        robj *emb;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (o-&gt;encoding == REDIS_ENCODING_EMBSTR) <span class="keyword">return</span> o;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        emb = createEmbeddedStringObject(s,sdslen(s));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        decrRefCount(o);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> emb;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 这个对象没办法进行编码，尝试从 SDS 中移除所有空余空间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (o-&gt;encoding == REDIS_ENCODING_RAW &amp;&amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        sdsavail(s) &gt; len/<span class="number">10</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        o-&gt;ptr = sdsRemoveFreeSpace(o-&gt;ptr);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/* Return the original object. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> o;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<p><strong>t_list</strong></p>
+<p>编码方式</p>
+<ul>
+<li>REDIS_ENCODING_ZIPLIST</li>
+<li>REDIS_ENCODING_LINKEDLIST</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Check if the length exceeds the ziplist length threshold. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看插入之后是否需要将编码转换为双端链表</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (subject-&gt;encoding == REDIS_ENCODING_ZIPLIST &amp;&amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ziplistLen(subject-&gt;ptr) &gt; server.list_max_ziplist_entries)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      listTypeConvert(subject,REDIS_ENCODING_LINKEDLIST);</span></pre></td></tr></table></figure>
+
+
+
+<p><strong>t_hash</strong></p>
+<p>编码方式</p>
+<ul>
+<li>REDIS_ENCODING_ZIPLIST</li>
+<li>REDIS_ENCODING_HT</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hashTypeTryConversion</span><span class="params">(robj *o, robj **argv, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 如果对象不是 ziplist 编码，那么直接返回</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (o-&gt;encoding != REDIS_ENCODING_ZIPLIST) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 检查所有输入对象，看它们的字符串值是否超过了指定长度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = start; i &lt;= <span class="built_in">end</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (sdsEncodedObject(argv[i]) &amp;&amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            sdslen(argv[i]-&gt;ptr) &gt; server.hash_max_ziplist_value)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 将对象的编码转换成 REDIS_ENCODING_HT</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            hashTypeConvert(o, REDIS_ENCODING_HT);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><strong>t_set</strong></p>
+<p>编码方式</p>
+<ul>
+<li>REDIS_ENCODING_INSET</li>
+<li>REDIS_ENCODING_HT</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setTypeConvert</span><span class="params">(robj *setobj, <span class="keyword">int</span> enc)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    setTypeIterator *si;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 确认类型和编码正确</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    redisAssertWithInfo(<span class="literal">NULL</span>,setobj,setobj-&gt;type == REDIS_SET &amp;&amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                             setobj-&gt;encoding == REDIS_ENCODING_INTSET);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (enc == REDIS_ENCODING_HT) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int64_t</span> intele;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 创建新字典</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        dict *d = dictCreate(&amp;setDictType,<span class="literal">NULL</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        robj *element;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* Presize the dict to avoid rehashing */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 预先扩展空间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        dictExpand(d,intsetLen(setobj-&gt;ptr));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* To add the elements we extract integers and create redis objects */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 遍历集合，并将元素添加到字典中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        si = setTypeInitIterator(setobj);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (setTypeNext(si,<span class="literal">NULL</span>,&amp;intele) != <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            element = createStringObjectFromLongLong(intele);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            redisAssertWithInfo(<span class="literal">NULL</span>,element,dictAdd(d,element,<span class="literal">NULL</span>) == DICT_OK);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        setTypeReleaseIterator(si);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 更新集合的编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        setobj-&gt;encoding = REDIS_ENCODING_HT;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        zfree(setobj-&gt;ptr);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 更新集合的值对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        setobj-&gt;ptr = d;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        redisPanic(<span class="string">"Unsupported set conversion"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<p><strong>t_zset</strong></p>
+<p>编码方式</p>
+<ul>
+<li>REDIS_ENCODING_ZIPLIST</li>
+<li>REDIS_ENCODING_SKIPLIST</li>
+</ul>
+<h4 id="4-欧几里得算法-辗转相处法"><a href="#4-欧几里得算法-辗转相处法" class="headerlink" title="4.欧几里得算法(辗转相处法)"></a>4.欧几里得算法(辗转相处法)</h4><p>欧几里得算法:</p>
+<ul>
+<li>求最大公约数的算法</li>
+<li>算法的核心思想：两个数的最大公约数等于<strong>较小的数和两数相除余数</strong>的最大公约数</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>判断两个数组成的分数是否最简，即最大公约数是否为1</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// pseudocode</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">function gcd(a,b):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">         <span class="keyword">while</span> b!= <span class="number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            t = b</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            b = a % b</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            a = t</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> a</span></pre></td></tr></table></figure>
+
+<p>递归形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(a,b)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">     <span class="keyword">return</span> b != <span class="number">0</span>? gcd(b,a%b): a;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
 <ul>
-<li>RDB的优缺点</li>
+<li>拓展</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">优点:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">1.RDB是一个非常紧凑(compact)的文件，它保存了redis 在某个时间点上的数据集。这种文件非常适合用于进行备份和灾难恢复。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.生成RDB文件的时候，redis主进程会fork()一个子进程来处理所有保存工作，主进程不需要进行任何磁盘IO操作。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">3.RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">缺点:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">1、RDB方式数据没办法做到实时持久化&#x2F;秒级持久化。因为bgsave每次运行都要执行fork操作创建子进程，属于重量级操作，如果不采用压缩算法(内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑)，频繁执行成本过高(影响性能)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">2、RDB文件使用特定二进制格式保存，Redis版本演进过程中有多个格式的RDB版本，存在老版本Redis服务无法兼容新版RDB格式的问题(版本不兼容)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">3、在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改(数据有丢失)</span></pre></td></tr></table></figure>
+<p>计算两个数的最大公约数的另一种方法</p>
+<p>更相减损法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//pseudocode</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">function gcd(a,b):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">         <span class="keyword">while</span> <span class="literal">true</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">if</span> a&gt; b:  a-=b</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span> a &lt; b: b -=a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">else</span>  <span class="keyword">return</span> a</span></pre></td></tr></table></figure>
 
-
-
-
-
-<p><strong>AOF(Append Of File)</strong></p>
-<p>通过保存Redis服务器所执行的写指令来记录数据库状态</p>
-<p><strong>AOF实现步骤</strong></p>
+<h4 id="5-语法问题"><a href="#5-语法问题" class="headerlink" title="5.语法问题"></a>5.语法问题</h4><p>c++中全局阈，只能声明、初始化变量</p>
+<p>不能用于赋值、运算和调用函数等</p>
+<p><strong>关于初始化及赋值</strong></p>
 <ul>
-<li>命令追加</li>
-<li>文件写入</li>
-<li>文件同步</li>
+<li>程序中的变量可以声明多次，但只能定义一次</li>
+<li>只有当声明变量也是定义的时候，声明才有初始化式（只有定义才分配存储空间，初始化必须要有存储空间来初始化）</li>
+<li>声明+初始化式  就是  定义</li>
+<li>赋值是一种运算，赋值等号是从右到左的运算符，对于全局变量，不能用于运算</li>
 </ul>
-<p><strong>AOF重写</strong></p>
-<p>aof rewrite，不仅仅是对现有的AOF文件进行读取、分析和写入</p>
-<p>而是创新一个新的AOF文件直接读取服务器当前数据库，并将新的AOF文件代替之前的AOF文件</p>
-<p>并利用AOF重写缓冲区解决数据不一致问题</p>
-<p>AOF重写过程中的流程</p>
+<p><strong>多余传参编译警告问题</strong></p>
+<p>函数传入参数未使用，编译会包报warning警告</p>
+<p>参考redis代码中的解决方案</p>
+<p>How to anti-warning</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// define a marco</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIS_NOTUSED(V)  ((void) V)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// function</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">function</span><span class="params">(<span class="keyword">int</span> arg)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  REDIS_NOTUSED(arg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">printf</span>(<span class="string">"fucntion\n"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-受限指针"><a href="#6-受限指针" class="headerlink" title="6. 受限指针"></a>6. 受限指针</h4><p>受限指针，一般出现在指针的声明中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> * <span class="keyword">restrict</span> p;</span></pre></td></tr></table></figure>
+
+<p>如果指针p指向的对象在之后需要修改，那么该对象不会允许通过除指针p之外的任何方式访问</p>
+<p>对程序有高性能要求才会添加</p>
+<h4 id="7-Python-zip-yield"><a href="#7-Python-zip-yield" class="headerlink" title="7.Python(zip,yield)"></a>7.Python(zip,yield)</h4><p><strong>zip(* iterables)</strong></p>
+<p>生成一个迭代器重新组合可迭代元素</p>
+<p>matrix是一个二维矩阵</p>
+<p>zip(*matrix) ，返回一个matrix矩阵每列的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># zip()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Make an iterator that aggregates elements from each of the iterables.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zip</span><span class="params">(*iterables)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment"># zip('ABCD', 'xy') --&gt; Ax By</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    sentinel = object()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    iterators = [iter(it) <span class="keyword">for</span> it <span class="keyword">in</span> iterables]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> iterators:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        result = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> it <span class="keyword">in</span> iterators:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            elem = next(it, sentinel)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> elem <span class="keyword">is</span> sentinel:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            result.append(elem)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">yield</span> tuple(result)</span></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = [1, 2, 3]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; y = [4, 5, 6]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; zipped = zip(x, y)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(zipped)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">[(1, 4), (2, 5), (3, 6)]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x2, y2 = zip(*zip(x, y))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x == list(x2) and y == list(y2)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">True</span></pre></td></tr></table></figure>
+
+<p><strong>yield</strong></p>
+<p>Delegating to a subgenerator</p>
+<p>Allowing a generator to delegate part of its operations to another genrator</p>
+<h4 id="8-线程"><a href="#8-线程" class="headerlink" title="8.线程"></a>8.线程</h4><p>线程通过pthread_create函数来创建其他线程</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">pthread_create(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">         <span class="keyword">void</span> *(*start_routine)(<span class="keyword">void</span> *), <span class="keyword">void</span> *arg);</span></pre></td></tr></table></figure>
+
+<p>成功返回，新创建线程id会设置成thread指向的内存单元；</p>
+<p>新建的线程会从start_routine(线程例程)函数地址开始运行;</p>
+<p><strong>互斥量 &amp; 条件变量</strong></p>
 <ul>
-<li>1.子进程进行aof文件重写期间，服务进程(父进程)可以继续处理命令请求</li>
-<li>2.父进程执行客户端的命令，将执行后写命令追加到<font color = green>AOF缓冲区</font></li>
-<li>3.将执行后的写命令追加到<font color = green>AOF重写缓冲区</font></li>
-<li>4.从创建子进程开始，服务区执行的写命令都会记录到AOF重写缓冲区里面</li>
-<li>5.子进程执行AOF重写,向父进程发送信号，AOF重写缓冲区的所有内容写入到AOF文件中</li>
-<li>6.原子地(atomic)覆盖现有的AOF文件</li>
+<li><p>互斥量mutex，本质上来说就是一把锁，在访问共享资源critical seciton对互斥量进行设置(加锁)</p>
+</li>
+<li><p>条件变量，是线程可用的另一种同步机制，条件变量给多个线程提供了一个会和的场所</p>
+</li>
 </ul>
+<p>条件变量+互斥量 一起使用，允许线程以无竞争的方式等待特定条件的发生</p>
+<p>条件变量是由互斥量保护，线程在改变条件状态之前必须先锁住互斥量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span></pre></td></tr></table></figure>
+
+<ul>
+<li>1.传递给pthread_cond_wait的互斥量mutex对条件进行保护</li>
+<li>2.调用者把锁住的互斥量传递给函数</li>
+<li>3.函数将调用者放到等待条件的的线程列表上，对互斥量进行解锁</li>
+<li>4.函数返回后，互斥量再次被锁住</li>
+</ul>
+<h4 id="9-fcntl-sync"><a href="#9-fcntl-sync" class="headerlink" title="9.fcntl sync"></a>9.fcntl sync</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// file control</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fildes, <span class="keyword">int</span> cmd, ...)</span></span>;</span></pre></td></tr></table></figure>
+
+<p>改变已经打开文件的属性</p>
+<p>Manipulate file descriptor</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">NAME</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">     sync -- force completion of pending disk writes (flush cache)</span></pre></td></tr></table></figure>
+
+<p>unix 系统实现在内核中设有<strong>缓冲区高速缓存</strong>或<strong>页高速缓存</strong></p>
+<p>大多数磁盘io都通过缓冲区进行</p>
+<p>向文件中写入数据（delayed write）</p>
+<ul>
+<li>1.内核copy到缓冲区(排队队列)</li>
+<li>2.缓冲区到磁盘</li>
+</ul>
+<p><strong>当需要重用缓冲区来存放其他磁盘数据，需要执行2步骤(flush)</strong></p>
+<p>Sync,fsync主要是用来保证磁盘上实际文件系统与缓冲区内容一致性</p>
+<h4 id="10-文件共享"><a href="#10-文件共享" class="headerlink" title="10.文件共享"></a>10.文件共享</h4><p>unix系统支持在不同进程间共享打开文件</p>
+<p>内核用于所有I/O的数据结构</p>
+<p>使用是3种数据结构表示打开的文件</p>
+<ul>
+<li>进程表项</li>
+<li>文件表项</li>
+<li>v节点表项</li>
+</ul>
+<p>注意区分 文件描述符 FD</p>
+<p>文件状态标志  FL</p>
+<p>两个文件描述符指向同一文件表项，所以共享同一文件状态标志</p>
+<p><strong>文件重定向</strong></p>
+<p>digit1   &gt; &amp;digit2</p>
+<p>表示要将描述符digit1 重定向到描述符digits2的同一文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">./a.out &gt; outfile  2 &gt; &amp;1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出到outfile</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行dup将标准输出复制到描述符2(标准错误)上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1，2 指向同一文件表项</span></span></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">./a.out  2 &gt; &amp;1  &gt; outfile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 描述符2 成为终端</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出重定向到outfile</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 描述符1 指向 outifle 文件表项</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 描述符2 指向 终端 的文件表项</span></span></pre></td></tr></table></figure>
+
+<h4 id="11-IO函数"><a href="#11-IO函数" class="headerlink" title="11. IO函数"></a>11. IO函数</h4><p>io函数都是围绕文件描述符</p>
+<p>标准io库都是围绕流(stream)</p>
+<p>标准io函数fopen，返回一个指向FILE对象的指针</p>
+<h4 id="12-编译与链接"><a href="#12-编译与链接" class="headerlink" title="12.编译与链接"></a>12.编译与链接</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// .o 可重定位目标文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">gcc -v   <span class="comment">// 可以显示版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标准指令</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">gcc - Og -o prog main.c sum.c</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指令拆解</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.预处理器 cpp</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">cpp [other arguments] main.c /tmp/main.i</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">main.c   -&gt; mian.i  <span class="comment">// ascii码的中间文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.c编译器  ccl</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">ccl /tmp/mian.i  -Og [other arguments] -o /tmp/main.s   <span class="comment">// ascii码的汇编语言文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3.汇编器 as</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">as [other arguments] -o /tmp/main.o /tmp/mian.s</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.o  可重定位目标文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4.链接器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">ld -o prog [system objects files <span class="keyword">and</span> args] /tmp/mian.o /tmp/sum.o</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5.运行</span></span></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt;./prog</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># shell调用os中一个叫做加载器loader的函数，将可执行文件prog中代码和数据复制到内存</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 并将控制转移到程序的开头</span></span></pre></td></tr></table></figure>
+
+<p><strong>程序执行的流程</strong></p>
+<p>内核执行c程序时，使用一个exec()函数</p>
+<ul>
+<li>1.c程序总是从main函数开始执行</li>
+<li>2.内核在调用main函数之前，先调用一个<strong>特殊的启动例程</strong></li>
+<li>3.可执行程序文件将此启动例程指定为程序的起始地址</li>
+<li>4.启动例程从内核取得命令行参数和环境变量值</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如果目标文件是由c代码编译生成的，用gcc做链接就可以，整个程序的入口点是ctr1.o中提供的 _start;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">它首先做一些初始化工作（以下成为启动例程 startup routine）, 然后调用c代码中提供的main函数；</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">真正正确的描述_start才函数真正的入口点，main函数是_start调用的</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">/usr/lib/gcc/i486-linux-gun/4.3.2/../../../../lib/ctr1.0a</span></pre></td></tr></table></figure>
+
+
+
+<h4 id="13-原型设计模式"><a href="#13-原型设计模式" class="headerlink" title="13.原型设计模式"></a>13.原型设计模式</h4><p>原型prototype，对象创建型设计模式</p>
+<ul>
+<li>abstract factory 抽象工厂模式，动态配置产生 原型模式</li>
+<li>抽象工厂模式，单个实例，产生单例模式</li>
+</ul>
+<p>在spring框架的bean工厂   beanfactory有较多的应用</p>
+<h4 id="14-动态语言vs静态语言"><a href="#14-动态语言vs静态语言" class="headerlink" title="14.动态语言vs静态语言"></a>14.动态语言vs静态语言</h4><p>动态语言：动态语言也叫弱类型语言，运行时才确定数据类型语言(js，python)</p>
+<p>静态语言：静态语言也叫强类型语言，编译时变量数据类型就可以确定（java,c/c++）</p>
 
       
 
@@ -414,7 +425,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Redis</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">信号;linux</a>
         		</li>
       		
 		</ul>
@@ -470,7 +481,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/20/Redis%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2022/02/27/202202-linux/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -484,18 +495,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/20/Redis%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis深入学习
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/19/Balanced-Tree/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Balanced Tree</div>
+    <a href="/2022/01/23/2022-Jan-23%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2022-Jan-23随机算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
